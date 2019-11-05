@@ -1,0 +1,88 @@
+{
+  "id": "5930a56c-e48d-4d2b-be00-a9ad10a1f8f2",
+  "version": "2.0",
+  "name": "Inmobiliaria",
+  "url": "http://localhost:8888",
+  "tests": [{
+    "id": "a64f7002-6192-4a3a-b14e-61df420f53c8",
+    "name": "Iniciar Sesion",
+    "commands": [{
+      "id": "74b95fce-a4d4-4fdb-abc4-d8f785dceb01",
+      "comment": "",
+      "command": "open",
+      "target": "/Sistema-Inmobiliaria/html/IniciarSesion.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ed277b2b-cc57-4300-848f-c3a5b0eeb241",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1221x725",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "896fb407-2ef7-4129-9137-d932cb63ddc6",
+      "comment": "",
+      "command": "click",
+      "target": "id=usuario",
+      "targets": [
+        ["id=usuario", "id"],
+        ["css=#usuario", "css:finder"],
+        ["xpath=//input[@id='usuario']", "xpath:attributes"],
+        ["xpath=//div[@id='login']/div/form/p/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4190074b-593c-4abf-b18f-8c9f17510c12",
+      "comment": "",
+      "command": "type",
+      "target": "id=usuario",
+      "targets": [
+        ["id=usuario", "id"],
+        ["css=#usuario", "css:finder"],
+        ["xpath=//input[@id='usuario']", "xpath:attributes"],
+        ["xpath=//div[@id='login']/div/form/p/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "dany"
+    }, {
+      "id": "e1cf4399-b0d8-45fd-9a95-e4d7e7e92877",
+      "comment": "",
+      "command": "type",
+      "target": "id=contrasena",
+      "targets": [
+        ["id=contrasena", "id"],
+        ["css=#contrasena", "css:finder"],
+        ["xpath=//input[@id='contrasena']", "xpath:attributes"],
+        ["xpath=//div[@id='login']/div/form/p[2]/input", "xpath:idRelative"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "12345"
+    }, {
+      "id": "4392c5f5-3ec6-4d48-a339-f3ab1b7798c6",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnIniciarSesion",
+      "targets": [
+        ["id=btnIniciarSesion", "id"],
+        ["css=#btnIniciarSesion", "css:finder"],
+        ["xpath=//button[@id='btnIniciarSesion']", "xpath:attributes"],
+        ["xpath=//div[@id='login']/div/form/div/p/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Iniciar Sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "4acd7133-772d-419d-aa9f-f49398da2c77",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a64f7002-6192-4a3a-b14e-61df420f53c8"]
+  }],
+  "urls": ["http://localhost:8888/"],
+  "plugins": []
+}
