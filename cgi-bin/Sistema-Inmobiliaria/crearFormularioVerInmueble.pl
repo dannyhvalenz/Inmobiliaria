@@ -53,7 +53,7 @@ if ($sth->rows gt 0){
 
                 # Div imagenes
                 my $foto = $row->{tipoInmueble};
-                $writer->startTag('div', class => 'w3-left w3-blue w3-margin-top w3-center', style => 'width:400px; height:220px;');
+                $writer->startTag('div', class => 'w3-left w3-margin-top w3-center', style => 'width:300px; height:200px;');
                     $writer->emptyTag('img', src => "/Sistema-Inmobiliaria/img/$foto.jpg", class => 'w3-right w3-round w3-image');
                 $writer->endTag('div');
 
@@ -63,22 +63,24 @@ if ($sth->rows gt 0){
                     $writer->startTag('div', class => 'w3-bar-item w3-container w3-padding-16');
                         $writer->dataElement('h2', $precio, id => 'lblPrecio' , style => 'font-weight:bold;');
                         $writer->startTag('p', class => 'p_selector');
-                            $writer->dataElement('label', 'Ciudad: ', style => 'font-size:18px;');
-                            $writer->dataElement('label', $row->{ciudad}, id => 'lblCiudad', style => 'font-size:18px; font-weight: 300' );
+                            $writer->dataElement('label', 'Ciudad: ', style => 'font-size:16px;');
+                            $writer->dataElement('label', $row->{ciudad}, id => 'lblCiudad', style => 'font-size:16px; font-weight: 300' );
                         $writer->endTag('p');
                         $writer->startTag('p', class => 'p_selector');
-                            $writer->dataElement('label', 'Colonia: ', style => 'font-size:18px;');
-                            $writer->dataElement('label', $row->{colonia}, id => 'lblColonia' , style => 'font-size:18px; font-weight: 300');
+                            $writer->dataElement('label', 'Colonia: ', style => 'font-size:16px;');
+                            $writer->dataElement('label', $row->{colonia}, id => 'lblColonia' , style => 'font-size:16px; font-weight: 300');
                         $writer->endTag('p');
                         $writer->startTag('p', class => 'p_selector');
-                            $writer->dataElement('label', 'Tipo de transaccion: ', style => 'font-size:18px;');
-                            $writer->dataElement('label', $row->{tipoTransaccion}, id => 'lblTipoTransaccion', style => 'font-size:18px; font-weight: 300');
+                            $writer->dataElement('label', 'Tipo de transaccion: ', style => 'font-size:16px;');
+                            $writer->dataElement('label', $row->{tipoTransaccion}, id => 'lblTipoTransaccion', style => 'font-size:16px; font-weight: 300');
                         $writer->endTag('p');
                         $writer->startTag('p', class => 'p_selector');
-                            $writer->dataElement('label', 'Tipo de propiedad: ', style => 'font-size:18px;');
-                            $writer->dataElement('label', $row->{tipoInmueble}, id => 'lblTipoPropiedad', style => 'font-size:18px; font-weight: 300');
+                            $writer->dataElement('label', 'Tipo de propiedad: ', style => 'font-size:16px;');
+                            $writer->dataElement('label', $row->{tipoInmueble}, id => 'lblTipoPropiedad', style => 'font-size:16px; font-weight: 300');
                         $writer->endTag('p');
                     $writer->endTag('div');
+                $writer->endTag('div');
+                $writer->startTag('div', id => 'divTipoPropiedad', class => 'w3-container w3-padding-16', style => 'width:700px; height:200px; clear:both;');
                 $writer->endTag('div');
 
             $writer->endTag('div');

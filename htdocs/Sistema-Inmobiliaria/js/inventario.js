@@ -212,7 +212,6 @@ function limpiarBusqueda () {
 function w3_open_actualizar(id) {
     idInmueble = id;
     abrirFormularioInmueble();
-    
     //var path = "mostrarInmuebleInventario.html?idInmueble="+id;
     document.getElementById("myModal").style.display = "block";
 
@@ -241,6 +240,8 @@ function abrirFormularioInmueble(){
                     for (i=0; i<x.length; ++i) {
                     document.getElementById('popUpPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
                 }
+                var tipoPropiedad = document.getElementById('lblTipoPropiedad').innerHTML;
+                cargarDatosTipoInmueble(tipoPropiedad);
             } else {
                 alert("Error de conexion con la base de datos");
             }
@@ -258,4 +259,249 @@ function abrirFormularioInmueble(){
 
 function cerrarPopup() {
     document.getElementById("myModal").style.display = "none";
+};
+
+
+function cargarDatosTipoInmueble(tipoPropiedad){
+    if (tipoPropiedad == "Casa"){
+        mostrarInfoCasa();
+    } else if(tipoPropiedad == "Departamento"){
+        mostrarInfoDepartamento();
+    } else if (tipoPropiedad == "Edificio"){
+        mostrarInfoEdificio();
+    } else if(tipoPropiedad == "Oficina"){
+        mostrarInfoOficina();
+    } else if (tipoPropiedad == "Local"){
+        mostrarInfoLocal();
+    } else if (tipoPropiedad == "Terreno"){
+        mostrarInfoTerreno();
+    }
+}
+
+function mostrarInfoLocal(){
+    console.log("Abrir info Local");
+    var q = "idInmueble="+idInmueble;
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+                document.getElementById('divTipoPropiedad').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                    document.getElementById('divTipoPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarLocalInventario.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+};
+
+function mostrarInfoDepartamento(){
+    console.log("Abrir info departamento");
+    var q = "idInmueble="+idInmueble;
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+                document.getElementById('divTipoPropiedad').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                    document.getElementById('divTipoPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarDepartamentoInventario.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+};
+
+function mostrarInfoEdificio(){
+    console.log("Abrir info edificio");
+    var q = "idInmueble="+idInmueble;
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+                document.getElementById('divTipoPropiedad').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                    document.getElementById('divTipoPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarEdificioInventario.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+};
+
+function mostrarInfoOficina(){
+    console.log("Abrir info oficina");
+    var q = "idInmueble="+idInmueble;
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+                document.getElementById('divTipoPropiedad').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                    document.getElementById('divTipoPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarOficinaInventario.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+};
+
+function mostrarInfoCasa(){
+    console.log("Abrir info Casa");
+    var q = "idInmueble="+idInmueble;
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+                document.getElementById('divTipoPropiedad').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                    document.getElementById('divTipoPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarCasaInventario.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+};
+
+function mostrarInfoTerreno(){
+    console.log("Abrir info terreno");
+    var q = "idInmueble="+idInmueble;
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+                document.getElementById('divTipoPropiedad').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                    document.getElementById('divTipoPropiedad').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarTerrenoInventario.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
 };
