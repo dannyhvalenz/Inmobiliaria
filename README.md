@@ -1,6 +1,11 @@
 # Proyecto-Inmobiliaria
  Sistema Web para una inmobiliaria
 
+## Modelo Relacional
+<p align="center">
+  <img src="https://github.com/dannyhvalenz/Inmobiliaria/blob/master/docs/Modelo%20Relacional.png">
+</p>
+
 ## Casos de uso
 
 ### Asesor
