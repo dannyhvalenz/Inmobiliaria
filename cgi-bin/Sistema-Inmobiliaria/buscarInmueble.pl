@@ -48,18 +48,20 @@ $writer->startTag('resultado');
 # https://metacpan.org/pod/release/RUDY/DBD-mysql-2.9008/lib/DBD/mysql.pm#Class_Methods
 if ($sth->rows gt 0){
     while (my $row = $sth->fetchrow_hashref){
-        $writer->startTag('div', class => 'w3-row w3-white w3-third w3-padding-small');
-        $writer->startTag('div', class => 'w3-white', id => 'contenedor_propiedad');
-        $writer->startTag('div', class => 'w3-card w3-hover-light-grey', onclick => "w3_open_actualizar(this.id)", id => "$row->{idInmueble}" );
-        
-        my $foto = $row->{tipoInmueble};
-        $writer->emptyTag('img', src => "/Sistema-Inmobiliaria/img/$foto.jpg", class => 'w3-right w3-round w3-image');
-        
-        $writer->dataElement('h4', $row->{precio}, class => "w3-margin-left w3-margin-right");
-        $writer->dataElement('label', $row->{tipoInmueble}, class => "w3-margin-left");
-        $writer->dataElement('label', $row->{idInmueble}, class => "w3-margin-right w3-text-white w3-right");
-        $writer->endTag('div');
-        $writer->endTag('div');
+        $writer->startTag('div', class => 'w3-white w3-quarter w3-padding-small', id => 'contenedor_principal', style => 'min-height: 230px;');
+            $writer->startTag('div', class => 'w3-white', id => 'contenedor_propiedad',  style => 'min-height: 230px;');
+                $writer->startTag('div', class => 'w3-card w3-hover-light-grey', onclick => "w3_open_actualizar(this.id)", id => "$row->{idInmueble}" , style => 'min-height: 220px;');
+            
+                    my $foto = $row->{tipoInmueble};
+                    $writer->emptyTag('img', src => "/Sistema-Inmobiliaria/img/$foto.jpg", class => 'w3-right w3-round w3-image');
+                    # Solo funciona para el primer row
+
+                    my $precio = "\$" . $row->{precio};
+                    $writer->dataElement('h4', $precio, class => "w3-margin-left w3-margin-right");
+                    $writer->dataElement('label', $row->{tipoInmueble}, class => "w3-margin-left");
+                    $writer->dataElement('label', $row->{idInmueble}, class => "w3-margin-right w3-text-white w3-right");
+                $writer->endTag('div');
+            $writer->endTag('div');
         $writer->endTag('div');
     }
 }

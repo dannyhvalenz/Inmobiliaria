@@ -72,7 +72,6 @@ function cerrarRegistro(){
     document.getElementById("txtnumExt").value = '';
     document.getElementById("txtnumInt").value = '';
     document.getElementById("txtprecio").value = '';
-
     window.open(outerHTML,"_parent");
 }
 

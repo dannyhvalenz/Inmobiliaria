@@ -13,10 +13,62 @@ var tipoTransaccion;
 var idInmueble;
 var tipoInmuebleAntesActualizar;
 
-/* DECLARACION DE VARIABLES (CASA) */
-var idCasa;
-var tipoCasa;
+// Casa
 var metrosCuadrados;
+var metrosConstruccion;
+var numPisos;
+var numRecamaras;
+var numBanos;
+var edadCasa;
+var tipoCasa;
+var tipoCocina;
+
+var cochera;
+var cocheraTechada;
+var numCoches;
+var cocheraTechada;
+var fraccionamiento;
+var fraccionamientoVigilancia;
+var fraccionamientoAreaVerde;
+var fraccionamientoCasaClub;
+var cuartoServicio;
+var sala;
+var comedor;
+var jardin;
+var areaLavado;
+var bodega;
+
+// Departamento
+var metrosConstruccion;
+var numPiso;
+var espacioHabitable;
+var edadDepartamento;
+var tipoDepartamento;
+var estacionamiento;
+var estacionamientoTechado;
+var vigilancia;
+
+// Oficina
+var edadOficina;
+var areaAbierta;
+var metrosAreaAbierta;
+var privados;
+var numPrivados;
+var recepcion;
+
+// Terreno
+var usoSuelo;
+var poligonal;
+var pendiente;
+var esquina;
+
+// Local
+var edadLocal;
+var dentroPlaza;
+
+// Edificio
+var edadEdificio;
+
 
 var outerHTML;
 var idAsesor;
@@ -211,19 +263,20 @@ function clickActualizar(){
 }
 
 function clickCancelar(){
+    
     document.getElementById("titulo").innerHTML = "MOSTRAR INMUEBLE";
     document.getElementById("divWhenMostrar").style.display = "block";
     document.getElementById("divWhenActualizar").style.display = "none";
     
-    document.getElementById("cmbPropietario").removeAttribute("disabled");
-    document.getElementById("txtciudad").removeAttribute("disabled");
-    document.getElementById("txtcolonia").removeAttribute("disabled");
-    document.getElementById("txtcalle").removeAttribute("disabled");
-    document.getElementById("txtnumExt").removeAttribute("disabled");
-    document.getElementById("txtnumInt").removeAttribute("disabled");
-    document.getElementById("txtprecio").removeAttribute("disabled");
-    document.getElementById("tipoInmueble").removeAttribute("disabled");
-    document.getElementById("tipoTransaccion").removeAttribute("disabled");
+    document.getElementById("cmbPropietario").setAttribute("disabled","disabled");
+    document.getElementById("txtciudad").setAttribute("disabled","disabled");
+    document.getElementById("txtcolonia").setAttribute("disabled","disabled");
+    document.getElementById("txtcalle").setAttribute("disabled","disabled");
+    document.getElementById("txtnumExt").setAttribute("disabled","disabled");
+    document.getElementById("txtnumInt").setAttribute("disabled","disabled");
+    document.getElementById("txtprecio").setAttribute("disabled","disabled");
+    document.getElementById("tipoInmueble").setAttribute("disabled","disabled");
+    document.getElementById("tipoTransaccion").setAttribute("disabled","disabled");
 
     document.getElementById("txtciudad").value = ciudad;
     document.getElementById("txtcolonia").value = colonia;
@@ -239,6 +292,31 @@ function clickCancelar(){
            break;
         }
     }
+
+    if (tipoInmueble == "Casa"){
+
+    } else if (tipoInmueble == "Departamento"){
+
+    } else if (tipoInmueble == "Local"){
+        document.getElementById("txtMetrosCuadrados").value = metrosCuadrados;
+        document.getElementById("txtNumBanos").value = numBanos;
+        document.getElementById("txtEdadLocal").value = edadLocal;
+        document.getElementById("DentroPlaza").value = dentroPlaza;
+    } else if (tipoInmueble == "Oficina"){
+
+    } else if (tipoInmueble == "Edificio"){
+        document.getElementById("txtMetrosConstruccion").value = metrosConstruccion;
+        document.getElementById("txtNumPisos").value = numPisos;
+        document.getElementById("txtNumBanos").value = numBanos;
+        document.getElementById("txtEdadEdificio").value = edadEdificio;
+    } else if (tipoInmueble == "Terreno"){
+
+    }
+    /*
+    outerHTML = outerHTML+"&nombre="+nombreAsesor;
+
+    window.open(outerHTML,"_parent");
+    */
 }
 
 function cargarInmueble(id){
@@ -438,112 +516,98 @@ function actualizarTipoInmueble(tipoInmueble){
     }
 }
 
-
 function actualizarCasa(){
     // RECUPERAR DATOS DE LOS INPUT
-    var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
-    var metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
-    var numPisos = document.getElementById("txtNumPisos").value;
-    var numRecamaras = document.getElementById("txtNumRecamaras").value;
-    var numBanos = document.getElementById("txtNumBanos").value;
-    var edadCasa = document.getElementById("txtEdadCasa").value;
-    var tipoCasa = document.getElementById("tipoCasa").value;
-    var tipoCocina = document.getElementById("tipoCocina").value;
+    metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
+    metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
+    numPisos = document.getElementById("txtNumPisos").value;
+    numRecamaras = document.getElementById("txtNumRecamaras").value;
+    numBanos = document.getElementById("txtNumBanos").value;
+    edadCasa = document.getElementById("txtEdadCasa").value;
+    tipoCasa = document.getElementById("tipoCasa").value;
+    tipoCocina = document.getElementById("tipoCocina").value;
 
-    var cochera;
+    
     if (document.getElementById("Cochera").checked == true){
         cochera = "Si";
     } else if (document.getElementById("Cochera").checked == false){
         cochera = "No";
     }
 
-    var cocheraTechada;
     if (document.getElementById("Cochera_Techada").checked == true){
         cocheraTechada = "Si";
     } else if (document.getElementById("Cochera_Techada").checked == false){
         cocheraTechada = "No";
     }
 
-    var numCoches = document.getElementById("inputNumCoches").value;
+    numCoches = document.getElementById("inputNumCoches").value;
 
-    var cocheraTechada;
     if (document.getElementById("Cochera_Techada").checked == true){
         cocheraTechada = "Si";
     } else if (document.getElementById("Cochera_Techada").checked == false){
         cocheraTechada = "No";
     }
 
-    var fraccionamiento;
     if (document.getElementById("Fraccionamiento").checked == true){
         fraccionamiento = "Si";
     } else if (document.getElementById("Fraccionamiento").checked == false){
         fraccionamiento = "No";
     }
 
-    var fraccionamientoVigilancia;
     if (document.getElementById("Fraccionamiento_Vigilancia").checked == true){
         fraccionamientoVigilancia = "Si";
     } else if (document.getElementById("Fraccionamiento_Vigilancia").checked == false){
         fraccionamientoVigilancia = "No";
     }
 
-    var fraccionamientoAreaVerde;
     if (document.getElementById("Fraccionamiento_AreaVerde").checked == true){
         fraccionamientoAreaVerde = "Si";
     } else if (document.getElementById("Fraccionamiento_AreaVerde").checked == false){
         fraccionamientoAreaVerde = "No";
     }
 
-    var fraccionamientoCasaClub;
     if (document.getElementById("Fraccionamiento_CasaClub").checked == true){
         fraccionamientoCasaClub = "Si";
     } else if (document.getElementById("Fraccionamiento_CasaClub").checked == false){
         fraccionamientoCasaClub = "No";
     }
 
-    var cuartoServicio;
     if (document.getElementById("CuartoServicio").checked == true){
         cuartoServicio = "Si";
     } else if (document.getElementById("CuartoServicio").checked == false){
         cuartoServicio = "No";
     }
 
-    var cuartoServicio;
     if (document.getElementById("CuartoServicio").checked == true){
         cuartoServicio = "Si";
     } else if (document.getElementById("CuartoServicio").checked == false){
         cuartoServicio = "No";
     }
 
-    var sala;
     if (document.getElementById("Sala").checked == true){
         sala = "Si";
     } else if (document.getElementById("Sala").checked == false){
         sala = "No";
     }
 
-    var comedor;
     if (document.getElementById("Comedor").checked == true){
         comedor = "Si";
     } else if (document.getElementById("Comedor").checked == false){
         comedor = "No";
     }
 
-    var jardin;
     if (document.getElementById("Jardin").checked == true){
         jardin = "Si";
     } else if (document.getElementById("Jardin").checked == false){
         jardin = "No";
     }
 
-    var areaLavado;
     if (document.getElementById("AreaLavado").checked == true){
         areaLavado = "Si";
     } else if (document.getElementById("AreaLavado").checked == false){
         areaLavado = "No";
     }
 
-    var bodega;
     if (document.getElementById("Bodega").checked == true){
         bodega = "Si";
     } else if (document.getElementById("Bodega").checked == false){
@@ -604,75 +668,66 @@ function actualizarCasa(){
 
 function actualizarDepartamento(){
     // RECUPERAR DATOS DE LOS INPUT
-    var metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
-    var numRecamaras = document.getElementById("txtNumRecamaras").value;
-    var numPiso = document.getElementById("txtPiso").value;
-    var espacioHabitable = document.getElementById("txtEspacioHabitable").value;
-    var numBanos = document.getElementById("txtNumBanos").value;
-    var edadDepartamento = document.getElementById("txtEdad").value;
-    var tipoDepartamento = document.getElementById("tipoDepartamento").value;
-    var tipoCocina = document.getElementById("tipoCocina").value;
+    metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
+    numRecamaras = document.getElementById("txtNumRecamaras").value;
+    numPiso = document.getElementById("txtPiso").value;
+    espacioHabitable = document.getElementById("txtEspacioHabitable").value;
+    numBanos = document.getElementById("txtNumBanos").value;
+    edadDepartamento = document.getElementById("txtEdad").value;
+    tipoDepartamento = document.getElementById("tipoDepartamento").value;
+    tipoCocina = document.getElementById("tipoCocina").value;
     
     // Obtener los datos del checklist
-    var estacionamiento;
     if (document.getElementById("Estacionamiento").checked == true){
         estacionamiento = "Si";
     } else if (document.getElementById("Estacionamiento").checked == false){
         estacionamiento = "No";
     }
 
-    var numCoches = document.getElementById("inputNumCoches").value;
+    numCoches = document.getElementById("inputNumCoches").value;
 
-    var estacionamientoTechado;
     if (document.getElementById("Estacionamiento_Techado").checked == true){
         estacionamientoTechado = "Si";
     } else if (document.getElementById("Estacionamiento_Techado").checked == false){
         estacionamientoTechado = "No";
     }
     
-    var vigilancia;
     if (document.getElementById("Vigilancia").checked == true){
         vigilancia = "Si";
     } else if (document.getElementById("Vigilancia").checked == false){
         vigilancia = "No";
     }
 
-    var cuartoServicio;
     if (document.getElementById("CuartoServicio").checked == true){
         cuartoServicio = "Si";
     } else if (document.getElementById("CuartoServicio").checked == false){
         cuartoServicio = "No";
     }
 
-    var sala;
     if (document.getElementById("Sala").checked == true){
         sala = "Si";
     } else if (document.getElementById("Sala").checked == false){
         sala = "No";
     }
 
-    var comedor;
     if (document.getElementById("Comedor").checked == true){
         comedor = "Si";
     } else if (document.getElementById("Comedor").checked == false){
         comedor = "No";
     }
 
-    var jardin;
     if (document.getElementById("Jardin").checked == true){
         jardin = "Si";
     } else if (document.getElementById("Jardin").checked == false){
         jardin = "No";
     }
 
-    var areaLavado;
     if (document.getElementById("AreaLavado").checked == true){
         areaLavado = "Si";
     } else if (document.getElementById("AreaLavado").checked == false){
         areaLavado = "No";
     }
 
-    var bodega;
     if (document.getElementById("Bodega").checked == true){
         bodega = "Si";
     } else if (document.getElementById("Bodega").checked == false){
@@ -740,35 +795,31 @@ function actualizarDepartamento(){
 
 function actualizarOficina(){
     var camposVacios = new Boolean(false);
-    var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
-    var numBanos = document.getElementById("txtNumBanos").value;
-    var edadOficina = document.getElementById("txtEdadOficina").value;
+    metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
+    numBanos = document.getElementById("txtNumBanos").value;
+    edadOficina = document.getElementById("txtEdadOficina").value;
     
-    var areaAbierta;
     if (document.getElementById("AreaAbierta").checked == true) {
         areaAbierta = "Si";
     } else if (document.getElementById("AreaAbierta").checked == false) {
         areaAbierta = "No";
     }
-    var metrosAreaAbierta = document.getElementById("inputMetrosAreaAbierta").value;
+    metrosAreaAbierta = document.getElementById("inputMetrosAreaAbierta").value;
 
-    var privados;
     if (document.getElementById("Privados").checked == true) {
         privados = "Si";
     } else if (document.getElementById("Privados").checked == false) {
         privados = "No";
     }
-    var numPrivados = document.getElementById("inputNumPrivados").value;
+    numPrivados = document.getElementById("inputNumPrivados").value;
     
-    var estacionamiento;
     if (document.getElementById("Estacionamiento").checked == true) {
         estacionamiento = "Si";
     } else if (document.getElementById("Estacionamiento").checked == false) {
         estacionamiento = "No";
     }
-    var numCoches = document.getElementById("inputNumCoches").value;
+    numCoches = document.getElementById("inputNumCoches").value;
     
-    var recepcion;
     if (document.getElementById("Recepcion").checked == true) {
         recepcion = "Si";
     } else if (document.getElementById("Recepcion").checked == false) {
@@ -846,11 +897,11 @@ function actualizarOficina(){
 
 function actualizarTerreno(){
     var camposVacios = new Boolean(false);
-    var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
-    var usoSuelo = document.getElementById("usoSuelo").value;
-    var poligonal = document.getElementById("poligonal").value;
-    var pendiente = document.getElementById("pendiente").value;
-    var esquina = document.getElementById("esquina").value;
+    metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
+    usoSuelo = document.getElementById("usoSuelo").value;
+    poligonal = document.getElementById("poligonal").value;
+    pendiente = document.getElementById("pendiente").value;
+    esquina = document.getElementById("esquina").value;
 
     // Creacion del query 
     var q = "idInmueble="+idInmueble+"&metrosCuadrados="+metrosCuadrados+"&usoSuelo="+usoSuelo+"&poligonal="+poligonal+"&pendiente="+pendiente+"&esquina="+esquina;
@@ -901,10 +952,10 @@ function actualizarTerreno(){
 
 function actualizarLocal(){
     var camposVacios = new Boolean(false);
-    var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
-    var numBanos = document.getElementById("txtNumBanos").value;
-    var edadLocal = document.getElementById("txtEdadLocal").value;
-    var dentroPlaza = document.getElementById("DentroPlaza").value;
+    metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
+    numBanos = document.getElementById("txtNumBanos").value;
+    edadLocal = document.getElementById("txtEdadLocal").value;
+    dentroPlaza = document.getElementById("DentroPlaza").value;
     
     // Creacion del query 
     var q = "idInmueble="+idInmueble+"&metrosCuadrados="+metrosCuadrados+"&numBanos="+numBanos+"&edadLocal="+edadLocal+"&dentroPlaza="+dentroPlaza;
@@ -956,10 +1007,10 @@ function actualizarLocal(){
 
 function actualizarEdificio(){
     var camposVacios = new Boolean(false);
-    var metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
-    var numPisos = document.getElementById("txtNumPisos").value;
-    var numBanos = document.getElementById("txtNumBanos").value;
-    var edadEdificio = document.getElementById("txtEdadEdificio").value;
+    metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
+    numPisos = document.getElementById("txtNumPisos").value;
+    numBanos = document.getElementById("txtNumBanos").value;
+    edadEdificio = document.getElementById("txtEdadEdificio").value;
     
     // Creacion del query 
     var q = "idInmueble="+idInmueble+"&metrosConstruccion="+metrosConstruccion+"&numPisos="+numPisos+"&numBanos="+numBanos+"&edadEdificio="+edadEdificio;
@@ -1128,39 +1179,39 @@ function cargarCasa(){
             
             if (titulo == "Carga exitosa"){
                 var idCasa = x[0].getElementsByTagName("idCasa")[0].textContent;
-                var metrosCuadrados = x[0].getElementsByTagName("metrosCuadrados")[0].textContent;
+                metrosCuadrados = x[0].getElementsByTagName("metrosCuadrados")[0].textContent;
                 document.getElementById("txtMetrosCuadrados").value = metrosCuadrados;
                 document.getElementById("txtMetrosCuadrados").setAttribute("disabled","disabled");
 
-                var metrosConstruccion = x[0].getElementsByTagName("metrosConstruccion")[0].textContent;
+                metrosConstruccion = x[0].getElementsByTagName("metrosConstruccion")[0].textContent;
                 document.getElementById("txtMetrosConstruccion").value = metrosConstruccion;
                 document.getElementById("txtMetrosConstruccion").setAttribute("disabled","disabled");
 
-                var numPisos = x[0].getElementsByTagName("numPisos")[0].textContent;
+                numPisos = x[0].getElementsByTagName("numPisos")[0].textContent;
                 document.getElementById("txtNumPisos").value = numPisos;
                 document.getElementById("txtNumPisos").setAttribute("disabled","disabled");
                 
-                var numRecamaras = x[0].getElementsByTagName("numRecamaras")[0].textContent;
+                numRecamaras = x[0].getElementsByTagName("numRecamaras")[0].textContent;
                 document.getElementById("txtNumRecamaras").value = numRecamaras;
                 document.getElementById("txtNumRecamaras").setAttribute("disabled","disabled");
 
-                var numBanos = x[0].getElementsByTagName("numBanos")[0].textContent;
+                numBanos = x[0].getElementsByTagName("numBanos")[0].textContent;
                 document.getElementById("txtNumBanos").value = numBanos;
                 document.getElementById("txtNumBanos").setAttribute("disabled","disabled");
 
-                var tipoCasa = x[0].getElementsByTagName("tipoCasa")[0].textContent;
+                tipoCasa = x[0].getElementsByTagName("tipoCasa")[0].textContent;
                 document.getElementById("tipoCasa").value = tipoCasa;
                 document.getElementById("tipoCasa").setAttribute("disabled","disabled");
 
-                var tipoCocina = x[0].getElementsByTagName("tipoCocina")[0].textContent;
+                tipoCocina = x[0].getElementsByTagName("tipoCocina")[0].textContent;
                 document.getElementById("tipoCocina").value = tipoCocina;
                 document.getElementById("tipoCocina").setAttribute("disabled","disabled");
 
-                var edadCasa = x[0].getElementsByTagName("edadCasa")[0].textContent;
+                edadCasa = x[0].getElementsByTagName("edadCasa")[0].textContent;
                 document.getElementById("txtEdadCasa").value = edadCasa;
                 document.getElementById("txtEdadCasa").setAttribute("disabled","disabled");
 
-                var cochera = x[0].getElementsByTagName("cochera")[0].textContent;
+                cochera = x[0].getElementsByTagName("cochera")[0].textContent;
                 if (cochera == "Si"){
                     document.getElementById("Cochera").checked = true;
                 } else if (cochera == "No"){
@@ -1168,7 +1219,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Cochera").setAttribute("disabled","disabled");
 
-                var cocheraTechada = x[0].getElementsByTagName("cocheraTechada")[0].textContent;
+                cocheraTechada = x[0].getElementsByTagName("cocheraTechada")[0].textContent;
                 if (cocheraTechada == "Si"){
                     document.getElementById("Cochera_Techada").checked = true;
                 } else if (cocheraTechada == "No"){
@@ -1176,11 +1227,11 @@ function cargarCasa(){
                 }
                 document.getElementById("Cochera_Techada").setAttribute("disabled","disabled");
 
-                var numCoches = x[0].getElementsByTagName("numCoches")[0].textContent;
+                numCoches = x[0].getElementsByTagName("numCoches")[0].textContent;
                 document.getElementById("inputNumCoches").value = numCoches;
                 document.getElementById("inputNumCoches").setAttribute("disabled","disabled");
 
-                var fraccionamiento = x[0].getElementsByTagName("fraccionamiento")[0].textContent;
+                fraccionamiento = x[0].getElementsByTagName("fraccionamiento")[0].textContent;
                 if (fraccionamiento == "Si"){
                     document.getElementById("Fraccionamiento").checked = true;
                 } else if (fraccionamiento == "No"){
@@ -1188,7 +1239,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Fraccionamiento").setAttribute("disabled","disabled");
 
-                var fraccionamientoVigilancia = x[0].getElementsByTagName("fraccionamientoVigilancia")[0].textContent;
+                fraccionamientoVigilancia = x[0].getElementsByTagName("fraccionamientoVigilancia")[0].textContent;
                 if (fraccionamientoVigilancia == "Si"){
                     document.getElementById("Fraccionamiento_Vigilancia").checked = true;
                 } else if (fraccionamientoVigilancia == "No"){
@@ -1196,7 +1247,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Fraccionamiento_Vigilancia").setAttribute("disabled","disabled");
 
-                var fraccionamientoAreaVerde = x[0].getElementsByTagName("fraccionamientoAreaVerde")[0].textContent;
+                fraccionamientoAreaVerde = x[0].getElementsByTagName("fraccionamientoAreaVerde")[0].textContent;
                 if (fraccionamientoAreaVerde == "Si"){
                     document.getElementById("Fraccionamiento_AreaVerde").checked = true;
                 } else if (fraccionamientoAreaVerde == "No"){
@@ -1204,7 +1255,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Fraccionamiento_AreaVerde").setAttribute("disabled","disabled");
 
-                var fraccionamientoCasaClub = x[0].getElementsByTagName("fraccionamientoCasaClub")[0].textContent;
+                fraccionamientoCasaClub = x[0].getElementsByTagName("fraccionamientoCasaClub")[0].textContent;
                 if (fraccionamientoCasaClub == "Si"){
                     document.getElementById("Fraccionamiento_CasaClub").checked = true;
                 } else if (fraccionamientoCasaClub == "No"){
@@ -1212,7 +1263,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Fraccionamiento_CasaClub").setAttribute("disabled","disabled");
 
-                var cuartoServicio = x[0].getElementsByTagName("cuartoServicio")[0].textContent;
+                cuartoServicio = x[0].getElementsByTagName("cuartoServicio")[0].textContent;
                 if (cuartoServicio == "Si"){
                     document.getElementById("CuartoServicio").checked = true;
                 } else if (cuartoServicio == "No"){
@@ -1220,7 +1271,7 @@ function cargarCasa(){
                 }
                 document.getElementById("CuartoServicio").setAttribute("disabled","disabled");
 
-                var sala = x[0].getElementsByTagName("sala")[0].textContent;
+                sala = x[0].getElementsByTagName("sala")[0].textContent;
                 if (sala == "Si"){
                     document.getElementById("Sala").checked = true;
                 } else if (sala == "No"){
@@ -1228,7 +1279,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Sala").setAttribute("disabled","disabled");
 
-                var comedor = x[0].getElementsByTagName("comedor")[0].textContent;
+                comedor = x[0].getElementsByTagName("comedor")[0].textContent;
                 if (comedor == "Si"){
                     document.getElementById("Comedor").checked = true;
                 } else if (comedor == "No"){
@@ -1236,7 +1287,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Comedor").setAttribute("disabled","disabled");
 
-                var jardin = x[0].getElementsByTagName("jardin")[0].textContent;
+                jardin = x[0].getElementsByTagName("jardin")[0].textContent;
                 if (jardin == "Si"){
                     document.getElementById("Jardin").checked = true;
                 } else if (jardin == "No"){
@@ -1244,7 +1295,7 @@ function cargarCasa(){
                 }
                 document.getElementById("Jardin").setAttribute("disabled","disabled");
 
-                var areaLavado = x[0].getElementsByTagName("areaLavado")[0].textContent;
+                areaLavado = x[0].getElementsByTagName("areaLavado")[0].textContent;
                 if (areaLavado == "Si"){
                     document.getElementById("AreaLavado").checked = true;
                 } else if (areaLavado == "No"){
@@ -1252,7 +1303,7 @@ function cargarCasa(){
                 }
                 document.getElementById("AreaLavado").setAttribute("disabled","disabled");
 
-                var bodega = x[0].getElementsByTagName("bodega")[0].textContent;
+                bodega = x[0].getElementsByTagName("bodega")[0].textContent;
                 if (bodega == "Si"){
                     document.getElementById("Bodega").checked = true;
                 } else if (bodega == "No"){
