@@ -19,13 +19,22 @@
 
         <title>Inmobiliaria</title>
     </head>
+
     <body class="index" onload="index()">
+
+        <!--
+            Barra superior
+        -->
         <div class="w3-bar">
             <span class="w3-bar-item w3-mobile">
                 <a href="index.html" class="w3-bar-item w3-button w3-mobile">
                     <img src="/Sistema-Inmobiliaria/img/logo.svg" alt="Logo" id="logo" />
                 </a>
             </span>
+
+            <!--
+                Boton que redirecciona al inicio de sesion
+            -->
             <span class="w3-bar-item w3-right w3-mobile w3-text-white">
                 <a href="iniciarSesion.html" class="w3-bar-item w3-mobile animoBorderLeftRight"
                     >Iniciar Sesion</a
@@ -43,24 +52,37 @@
             </span>
         </div>
 
+        <!--
+            Card con los filtros para encontrar propiedades con las neceisdades del cliente
+        -->
         <div class="w3-white w3-card-4 w3-display-middle w3-round-xlarge">
             <h1 class=" w3-padding-large w3-text-shadow w3-center">
                 Buscar Propiedades
             </h1>
             <div class="w3-center" style="display: felx;">
                 <form class="w3-center w3-container w3-bar">
+
                     <div class="w3-bar-item">
+                        <!--
+                            Seleccionar Ciudad
+                            Este selector se llena con las ciudades que hay registradas en la BD
+                        -->
                         <p class="p_selector">Ciudad:</p>
-                        <select name="Ciudad" class="selector_inventario" id="ciudades">
-                            
-                        </select>
+                        <select name="Ciudad" class="selector_inventario" id="ciudades"></select>
                     </div>
+
                     <div class="w3-bar-item w3-mobile">
+                        <!--
+                            Seleccionar Colonia
+                            Este selector se llena con las colonias que hay registradas en la BD
+                        -->
                         <p class="p_selector">Colonia:</p>
-                        <select name="Colonia" class="selector_inventario" id="colonias">
-                        </select>
+                        <select name="Colonia" class="selector_inventario" id="colonias"></select>
                     </div>
                     <div class="w3-cell w3-center">
+                        <!--
+                            Seleccionar tipo de transaccion (Renta o Venta)
+                        -->
                         <p class="p_selector">Tipo de transaccion:</p>
                         <select name="TipoTransaccion" class="selector_inventario" id="tipoTransaccion">
                             <option value="Renta">Renta</option>
@@ -68,6 +90,9 @@
                         </select>
                     </div>
                     <div class="w3-bar-item">
+                        <!--
+                            Seleccionar tipo de propiedad
+                        -->
                         <p class="p_selector">Tipo de propiedad:</p>
                         <select name="Tipo_propiedad" class="selector_inventario" id="tipoInmueble">
                             <option value="Casa">Casa</option>
@@ -79,8 +104,13 @@
                         </select>
                     </div>
                     <div class="w3-bar-item">
+                        <!--
+                            Selector de rango de precios
+                            Consta de un textfield para el precio minimo y otro para el maximo
+                        -->
                         <p class="p_selector">Rango de precios:</p>
                         <p style="display: inline-flex;">
+                            <!--Precio Minimo-->
                             <input
                                 type="number"
                                 placeholder="precio min"
@@ -89,6 +119,7 @@
                                 style="margin-right: 10px;"
                             />
                             <span></span>
+                            <!--Precio Maximo-->
                             <input
                                 type="number"
                                 placeholder="precio max"
@@ -99,6 +130,10 @@
                     </div>
                 </form>
                 <br />
+                <!--
+                    Boton buscar que se encarga de redireccionarnos al inventario y mostrar 
+                    el resultado de la busqueda con los parametros seleccionados
+                -->
                 <div class="w3-center w3-padding-small">
                     <button class="btn_buscar" id="btnBuscarInmueble" onclick="buscar()"/>
                         Buscar

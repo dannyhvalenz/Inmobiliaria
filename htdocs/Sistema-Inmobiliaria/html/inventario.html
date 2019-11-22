@@ -27,8 +27,10 @@
 
     </head>
     <body> 
+        <!--Barra Superior-->
         <div class="w3-bar w3-black w3-opacity">
             <span class="w3-bar-item w3-mobile">
+                <!--Boton que nos envia a la ventana principal del sistema-->
                 <a href="index.html" class="w3-bar-item w3-mobile animoBorderLeftRight">
                     <img
                         src="/Sistema-Inmobiliaria/img/logo.svg"
@@ -39,26 +41,39 @@
                 </a>
             </span>
             <span class="w3-bar-item w3-right w3-mobile w3-text-white">
+                <!--Boton que nos envia a la ventana de inicio de sesion-->
                 <a href="http://localhost:8888/Sistema-Inmobiliaria/html/IniciarSesion.html" class="w3-bar-item w3-mobile animoBorderLeftRight"
                     >Iniciar Sesion</a
                 >
             </span>
         </div>
+
+        <!--Div que contiene todos los filtros que el cliente puede aplicar a la busqueda-->
         <div
-            class="w3-white w3-container w3-cell-row w3-margin-right w3-padding-16"
-        >
+            class="w3-white w3-container w3-cell-row w3-margin-right w3-padding-16">
             <div class="w3-cell w3-center">
+                <!--
+                    Selector ciudad
+                    Se llena a partir de las colonias registradas en la BD
+                -->
                 <p class="p_selector">Ciudad:</p>
                 <select name="Ciudad" class="selector_inventario" id="ciudades">
                     
                 </select>
             </div>
             <div class="w3-cell w3-center">
+                <!--
+                    Selector colonia
+                    Se llena a partir de las colonias registradas en la BD
+                -->
                 <p class="p_selector">Colonia:</p>
                 <select name="Colonia" class="selector_inventario" id="colonias">
                 </select>
             </div>
             <div class="w3-cell w3-center">
+                <!--
+                    Selector tipo de transaccion (Renta o Venta)
+                -->
                 <p class="p_selector">Tipo de transaccion:</p>
                 <select name="TipoTransaccion" class="selector_inventario" id="tipoTransaccion">
                     <option value="Renta">Renta</option>
@@ -66,6 +81,9 @@
                 </select>
             </div>
             <div class="w3-cell w3-center">
+                <!--
+                    Selector tipo de propiedad
+                -->
                 <p class="p_selector">Tipo de propiedad:</p>
                 <select name="Tipo_propiedad" class="selector_inventario" id="tipoInmueble">
                     <option value="Casa">Casa</option>
@@ -77,8 +95,12 @@
                 </select>
             </div>
             <div class="w3-cell w3-center">
+                <!--
+                    Selector de rango de precios (Precio Minimo y Maximo)
+                -->
                 <p class="p_selector">Rango de precios:</p>
                 <p style="display: inline-flex;">
+                    <!--Textfield Precio Minimo-->
                     <input
                         type="number"
                         placeholder="precio min"
@@ -87,6 +109,7 @@
                         style="margin-right: 10px;"
                     />
                     <span></span>
+                    <!--Textfield Precio Maximo-->
                     <input
                         type="number"
                         placeholder="precio max"
@@ -95,6 +118,10 @@
                     />
                 </p>    
             </div>
+            <!--
+                Boton buscar para realizar una nueva busqueda y mostrar los inmuebles
+                con las caracteristicas seleccionadas
+            -->
             <div class="w3-cell w3-cell-bottom">
                 <button class="btn_buscar" id="btnBuscarInmueble" onclick="buscar('No')"/>
                 Buscar
@@ -102,10 +129,13 @@
             </div>
         </div>
 
+        <!--Barra lateral-->
         <div class="w3-cell-row" id="contenedor">
             <div id="ordenar_por" class="w3-left w3-white w3-cell w3-container">
                 <h3 class="w3-center">Ordenar por</h3>
+                <!--Radio Buttons que nos permiten ordenar por precio ascendente y descendente-->
                 <div class="w3-margin-left">
+                    <!--Precio ascendente-->
                     <input
                         id="option-one"
                         name="radio"
@@ -118,6 +148,7 @@
                     </label>
                 </div>
                 <div class="w3-margin-left">
+                    <!--Precio descendente-->
                     <input
                         id="option-two"
                         name="radio"
@@ -129,17 +160,19 @@
                         <span></span> Precio Descendente
                     </label>
                 </div>
+                <!--Boton que nos permite borrar los filtros y nos muestra todos los inmuebles-->
                 <div class="w3-margin-left w3-padding-24 w3-bottom">
                     <button class="w3-button w3-blue" onclick="limpiarBusqueda()">Limpiar Filtros</button>
                 </div>
             </div>
+            <!--Div donde se mostraran todas las propiedades-->
             <div id="box" class="w3-right w3-row" style="width: 75%;">
                 <h1 id="titulo" class="w3-text-orange">CARGANDO</h1>
             </div>
         </div>
         <div id="myModal" class="modal">
 
-        <!-- Modal content -->
+        <!-- Modal content que muestra la informacion de la propiedad seleccionada -->
         <div class="modal-content" id="popUpPropiedad">
             <span class="close" onclick="cerrarPopup()">&times;</span>
             <p>Some text in the Modal..</p>

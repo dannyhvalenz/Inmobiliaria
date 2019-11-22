@@ -18,6 +18,7 @@
     <script type="application/javascript" src="/Sistema-Inmobiliaria/js/login.js"></script>
 
     <body class="inicioSesion">
+        <!--Barra Superior de la pagina web-->
         <div class="w3-bar w3-dark-grey">
             <span class="w3-bar-item w3-mobile">Inmobiliaria</span
             ><span class="w3-right w3-mobile">
@@ -29,6 +30,7 @@
             </span>
         </div>
 
+        <!--Card donde se encuentran los textfields y el boton para iniciar sesion-->
         <div class="w3-display-middle" id="login" style="width:50%">
             <div class="w3-card-4">
                 <div class="w3-container w3-dark-grey">
@@ -37,6 +39,7 @@
 
                 <form class="w3-container" action="javascript:;">
                     <p>
+                        <!--Textfield Usuarios-->
                         <input
                             class="w3-input w3-border w3-round"
                             placeholder="usuario"
@@ -46,6 +49,7 @@
                         />
                     </p>
                     <p>
+                        <!--Textfield Contraseña-->
                         <input
                             class="w3-input w3-border w3-round"
                             placeholder="contraseña"
@@ -57,6 +61,7 @@
                     <p class="w3-center"" id="mensaje" style="display: none;">Mensaje</p>
                     <div class="w3-center">
                         <p>
+                            <!--Boton Iniciar Sesion-->
                             <button class="w3-button w3-dark-grey w3-wide" id="btnIniciarSesion" onclick="enviarPeticion()">
                                Iniciar Sesión
                             </button>
