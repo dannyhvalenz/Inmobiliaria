@@ -99,7 +99,8 @@ if (variable.get("idInmueble") != null){
     alert("No se pudo recuperar la informacion de la base de datos");
 }
 
-
+// CARGA LOS PROPIETARIOS EN EL CAMBOBOX, SOLO SI EL ASESOR CON LA SESION INICIADA ES QUIEN REGISTRO EL 
+// INMUEBLE SE LE MOSTRARA EL NOMBRE DEL PROPIETARIO
 function cargarPropietariosComboBox(id) {
     var xhr = new XMLHttpRequest();
     var existeRespuesta = new Boolean (false);
@@ -174,6 +175,7 @@ function verificarPermisosInmueble(id) {
     xhr.send(q);
 }
 
+// HABILITA LOS CAMPOS
 function clickActualizar(){
     document.getElementById("titulo").innerHTML = "ACTUALIZAR INMUEBLE";
     document.getElementById("divWhenActualizar").style.display = "block";
@@ -262,6 +264,7 @@ function clickActualizar(){
     }
 }
 
+// RESTABLECE LOS CAMPOS
 function clickCancelar(){
     
     document.getElementById("titulo").innerHTML = "MOSTRAR INMUEBLE";
@@ -319,6 +322,7 @@ function clickCancelar(){
     */
 }
 
+// CARGA LA INFORMACION DEL CLIENTE
 function cargarInmueble(id){
    
     var xhr = new XMLHttpRequest();
@@ -390,6 +394,7 @@ function cargarInmueble(id){
     xhr.send(q);
 }
 
+// OBTIENE EL NOMBRE DEL PROPIETARIO DEL INMUEBLE
 function getNombrePropietario(id){
     var xhr = new XMLHttpRequest();
     var q = "idPropietario="+id;
@@ -434,6 +439,7 @@ function getNombrePropietario(id){
     xhr.send(q);
 }
 
+// ACTUALIZA AL INMUEBLE
 function actualizarInmueble(){
 
     // RECUPERAR DATOS DE LOS INPUT
@@ -499,6 +505,7 @@ function actualizarInmueble(){
     }
 };
 
+// DEPENDIENDO DEL TIPO DE INMUEBLE ES LA FUNCION QUE SE LLAMA
 function actualizarTipoInmueble(tipoInmueble){
     alert(tipoInmueble)
     if (tipoInmueble == "Casa"){
@@ -516,6 +523,7 @@ function actualizarTipoInmueble(tipoInmueble){
     }
 }
 
+// ACTUALIZA LA CASA
 function actualizarCasa(){
     // RECUPERAR DATOS DE LOS INPUT
     metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -666,6 +674,7 @@ function actualizarCasa(){
     }
 }
 
+// ACTUALIZA EL DEPARTAMENTO
 function actualizarDepartamento(){
     // RECUPERAR DATOS DE LOS INPUT
     metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
@@ -793,6 +802,7 @@ function actualizarDepartamento(){
     }
 }
 
+// ACTUALIZA LA OFICINA
 function actualizarOficina(){
     var camposVacios = new Boolean(false);
     metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -895,6 +905,7 @@ function actualizarOficina(){
     }
 }
 
+// ACTUALIZA EL TERRENO
 function actualizarTerreno(){
     var camposVacios = new Boolean(false);
     metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -950,6 +961,7 @@ function actualizarTerreno(){
     }
 }
 
+// ACTUALIZA EL LOCAL
 function actualizarLocal(){
     var camposVacios = new Boolean(false);
     metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -1005,6 +1017,7 @@ function actualizarLocal(){
     }
 }
 
+// ACTUALIZA EL EDIFICIO
 function actualizarEdificio(){
     var camposVacios = new Boolean(false);
     metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
@@ -1060,6 +1073,7 @@ function actualizarEdificio(){
     }
 }
 
+// ELIMINA EL INMUEBLE
 function clickEliminar(){
     alert("Eliminar Inmueble");
     var q = "idInmueble="+idInmueble;
@@ -1094,6 +1108,7 @@ function clickEliminar(){
         xhr.send(q);
 };
 
+// ABRE EL INMUEBLE Y LLAMA A LAS FUNCIONES CORRESPONDIENTES
 function w3_open_inmueble() {
     var selectorInmueble = document.getElementById("tipoInmueble");
     var tipoInmueble = selectorInmueble.options[selectorInmueble.selectedIndex].text;
@@ -1121,6 +1136,7 @@ function w3_open_inmueble() {
     
 }
 
+// CIERRA EL FORMULARIO
 function w3_close_inmueble() {
     document.getElementById("divAdmin").style.display = "none";
 }  
@@ -1164,6 +1180,7 @@ function abrirFormularioCasa(){
     xhr.send();
 };
 
+// CARGA LOS DATOS DE LA CASA
 function cargarCasa(){
     var xhr = new XMLHttpRequest();
     var q = "idInmueble="+idInmueble;
@@ -1362,6 +1379,7 @@ function abrirFormularioDepartamento(){
     xhr.send();
 };
 
+// CARGA LOS DATOS DEL DEPARTAMENTO
 function cargarDepartamento(){
     var xhr = new XMLHttpRequest();
     var q = "idInmueble="+idInmueble;
@@ -1499,6 +1517,7 @@ function cargarDepartamento(){
     xhr.responseType = "document";
     xhr.send(q);
 }
+
 // FUNCION QUE CREA EL FORMULARIO DE OFICINA
 function abrirFormularioOficina(){
     var xhr = new XMLHttpRequest();
@@ -1536,6 +1555,7 @@ function abrirFormularioOficina(){
     xhr.send();
 };
 
+// CARGA LOS DATOS DE LA OFICINA
 function cargarOficina(){
     var xhr = new XMLHttpRequest();
     var q = "idInmueble="+idInmueble;
@@ -1658,6 +1678,7 @@ function abrirFormularioEdificio(){
     xhr.send();
 };
 
+// CARGA LOS DATOS DEL EDIFICIO
 function cargarEdificio(){
     var xhr = new XMLHttpRequest();
     var q = "idInmueble="+idInmueble;
@@ -1702,6 +1723,7 @@ function cargarEdificio(){
     xhr.responseType = "document";
     xhr.send(q);
 }
+
 // FUNCION QUE CREA EL FORMULARIO DE LOCAL
 function abrirFormularioLocal(){
     var xhr = new XMLHttpRequest();
@@ -1739,6 +1761,7 @@ function abrirFormularioLocal(){
     xhr.send();
 };
 
+// CARGA LOS DATOS DEL LOCAL
 function cargarLocal(){
     var xhr = new XMLHttpRequest();
     var q = "idInmueble="+idInmueble;
@@ -1821,6 +1844,7 @@ function abrirFormularioTerreno(){
     xhr.send();
 };
 
+// CARGA LOS DATOS DEL TERRENO
 function cargarTerreno(){
     var xhr = new XMLHttpRequest();
     var q = "idInmueble="+idInmueble;

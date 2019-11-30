@@ -23,6 +23,7 @@ if (variable.get("idCliente") != null){
     alert("No se pudo recuperar la informacion de la base de datos");
 }
 
+// HABILITA LOS CAMPOS PARA ACTUALIZAR AL CLIENTE
 function clickActualizar(){
     document.getElementById("titulo").innerHTML = "ACTUALIZAR CLIENTE";
     document.getElementById("divWhenMostrar").style.display = "none";
@@ -35,6 +36,7 @@ function clickActualizar(){
     document.getElementById("txtcorreo").removeAttribute("disabled");
 }
 
+// RESTABLECE LOS CAMPOS CON LOS DATOS ANTERIORES
 function clickCancelar(){
     document.getElementById("titulo").innerHTML = "MOSTRAR CLIENTE";
     document.getElementById("divWhenMostrar").style.display = "block";
@@ -53,6 +55,7 @@ function clickCancelar(){
     document.getElementById("txtcorreo").value = correo;
 }
 
+// CARGA LA INFORMACION DEL CLIENTE
 function cargarCliente(id){
     var xhr = new XMLHttpRequest();
     idCliente = id;
@@ -107,6 +110,7 @@ function ShowResults(value) {
     alert(value);
  }
 
+ // FUNCION QUE ACTUALIZA AL CLIENTE
 function actualizarCliente(){
     /* RECUPERAR DATOS DE LOS INPUT */
     nombre = document.getElementById("txtnombre").value;
@@ -185,6 +189,7 @@ function actualizarCliente(){
     }
 };
 
+// FUNCION QUE ELIMINA AL CLIENTE
 function clickEliminar(){
     var q = "idCliente="+idCliente;
     console.log("Eliminar Cliente");

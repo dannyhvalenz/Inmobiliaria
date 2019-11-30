@@ -1,3 +1,4 @@
+// RELLENA LOS COMBOBOX COLONIA Y CIUDADES CON LOS DATOS DE LA BD
 function index() {
     var xhr = new XMLHttpRequest();
     var existeRespuesta = new Boolean (false);
@@ -59,6 +60,7 @@ function index() {
     xhr.send();
 };
 
+// FUNCION QUE REDIRECCIONA AL INVENTARIO CON LA BUSQUEDA REALIZADA EN LA PAGINA PRINCIPAL
 function buscar() {
     var ciudad = document.getElementById("ciudades").value;
     var colonia = document.getElementById("colonias").value;

@@ -24,6 +24,7 @@ if (variable.get("idPropietario") != null){
     alert("No se pudo recuperar la informacion de la base de datos");
 }
 
+// HABILITA LOS CAMPOS PARA COMENZAR A ACTUALIZAR
 function clickActualizar(){
     document.getElementById("titulo").innerHTML = "ACTUALIZAR PROPIETARIO";
     document.getElementById("divWhenMostrar").style.display = "none";
@@ -37,6 +38,7 @@ function clickActualizar(){
     document.getElementById("txtcorreo").removeAttribute("disabled");
 }
 
+// RESTABLECE LOS CAMPOS CON LA INFORMACION DEL PROPIETARIO
 function clickCancelar(){
     document.getElementById("titulo").innerHTML = "MOSTRAR PROPIETARIO";
     document.getElementById("divWhenMostrar").style.display = "block";
@@ -57,6 +59,7 @@ function clickCancelar(){
     document.getElementById("txtcorreo").value = correo;
 }
 
+// FUNCION QUE CARGA LOS DATOS DEL PROPIETARIO
 function cargarPropietario(id){
     var xhr = new XMLHttpRequest();
     idPropietario = id;
@@ -115,6 +118,7 @@ function ShowResults(value) {
     alert(value);
  }
 
+ // FUNCION QUE PERMITE ACUTALIZAR AL PROPIETARIO
 function actualizarPropietario(){
     /* RECUPERAR DATOS DE LOS INPUT */
     nombre = document.getElementById("txtnombre").value;
@@ -196,6 +200,7 @@ function actualizarPropietario(){
     }
 };
 
+// FUNCION QUE PERMITE ELIMINAR AL PROPIETARIO
 function clickEliminar(){
     var q = "idPropietario="+idPropietario;
     console.log("Eliminar Propietario");
