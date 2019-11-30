@@ -29,14 +29,18 @@
 
     </head>
     <body>
+        <!--FORMULARIO GESTIONAR CLIENTE-->
         <form>
             <header class="w3-container w3-orange w3-center w3-text-white">
                 <h1 class="w3-xlarge" id="titulo">MOSTRAR INMUEBLE</h1>
             </header>
+            <!--DIV DE BOTONES QUE APARECE SOLO SI EL ASESOR CON LA SESION INICIADA ES QUIEN REGISTRO AL INMUEBLE-->
             <div class="w3-bar w3-right-align" id="divWhenMostrar" style="display: none;">
+                <!--BOTON QUE PERMITE ACTUALIZAR EL INMUEBLE (HABILITA LOS CAMPOS)-->
                 <button type="button" class="w3-button w3-hover-blue w3-text-blue" id="btnActualizar" onclick="clickActualizar()" title="Actualizar">
                     <i class="fa fa-edit"></i>&#9;Actualizar
                 </button>
+                <!--BOTON QUE PERMITE ELIMINAR EL INMUEBLE-->
                 <button type="button" class="w3-button w3-hover-blue w3-text-blue" id="btnEliminar" onclick="clickEliminar()" title="Eliminar">
                     <i class="fa fa-trash"></i>&#9;Eliminar
                 </button>
@@ -52,7 +56,7 @@
                         </p>
                     </div>
                 </div> 
-
+                <!--TEXTFIELD CIUDAD-->
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -63,6 +67,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD COLONIA-->
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -73,6 +78,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD CALLE-->
                 <div class="w3-third">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -83,7 +89,7 @@
                         />
                     </div>
                 </div>
-                
+                <!--TEXTFIELD NUM EXTERIOR-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -94,6 +100,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD NUM INTERIOR-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -104,6 +111,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD PRECIO-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -114,7 +122,7 @@
                         />
                     </div>
                 </div>
-
+                <!--COMBOBOX TIPO DE TRANSACCION-->
                 <div class="w3-third w3-container">
                     <div class="w3-bar-item w3-container w3-padding-16">
                         <p class="p_selector">Tipo de transaccion:
@@ -125,7 +133,7 @@
                         </p>
                     </div>
                 </div> 
-
+                <!--COMBOBOX TIPO DE INMUBLE-->
                 <div class="w3-third w3-container">
                     <div class="w3-bar-item w3-container w3-padding-16">
                         <p class="p_selector">Tipo de Inmueble:
@@ -140,9 +148,9 @@
                             </select>
                         </p>
                     </div>
-                </div> 
-                    
+                </div>     
             </div>  
+            <!--DIV DONDE SE INSERTA EL FORMULARIO QUE SE MUESTRA DEPENDIENDO DEL TIPO DE INMUEBLE SELECCIONADO-->
             <div class="w3-container" id="divTipoPropiedad">
                 <div class="contenedor" id="contenido" >
                     <object></object>
@@ -152,9 +160,11 @@
             <!-- DIV BOTONES PARA ACTUALIZAR INMUEBLE-->
             <div class="w3-margin w3-container w3-center" id="divWhenActualizar" style = "display: none">
                 <div class="w3-bar">
+                    <!--BOTON CANCELAR - NO GUARDA LOS CAMBIOS-->
                     <button type="button" class="w3-button w3-red w3-hover-blue" id="btnCancelarActualizar" onclick="clickCancelar()">
                         <i class="fa fa-times"></i>&#9;Cancelar
                     </button>
+                    <!--BOTON GUARDAR - ACTUALIZA LOS DATOS DEL INMEUBLE EN LA BD-->
                     <button type="button" class="w3-button w3-green w3-hover-blue" id="btnGuardarActualizar" onclick="actualizarInmueble()">
                         <i class="fa fa-check"></i>&#9;Guardar
                     </button>
@@ -163,6 +173,7 @@
         </form>
     </body>
 
+    <!--SCRIPTS-->
     <script type="application/javascript" src="/Sistema-Inmobiliaria/js/gestionar_inmueble.js"></script>
     <script type="application/javascript" src="/Sistema-Inmobiliaria/js/tipoInmueble.js"></script>
 </html>

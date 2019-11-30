@@ -41,19 +41,25 @@
     </style>
 </head>
 <body>
+    <!--FORMULARIO GESTION DE PROPIETARIO-->
     <form class="w3-card-4">
         <header class="w3-container w3-orange w3-center ">
             <h1 class="w3-xxlarge w3-text-white" id="titulo">MOSTRAR PROPIETARIO</h1>
         </header>
+        
         <div class="w3-bar w3-right-align" id="divWhenMostrar">
+            <!--BOTON QUE PERMITE ACTUALIZAR LOS CAMPOS DEL PROPIETARIO-->
             <button type="button" class="w3-button w3-hover-blue w3-text-blue" id="btnActualizar" onclick="clickActualizar()" title="Actualizar">
                 <i class="fa fa-edit"></i>&#9;Actualizar
             </button>
+            <!--BOTON QUE PERMITE ELIMINAR AL PROPIETARIO-->
             <button type="button" class="w3-button w3-hover-blue w3-text-blue" id="btnEliminarPropietario" onclick="clickEliminar()" title="Eliminar">
                 <i class="fa fa-trash"></i>&#9;Eliminar
             </button>
         </div>
+        <!--DIV QUE CONTIENE LOS CAMPOS CON LOS DATOS DEL PROPIETARIO-->
         <div class="w3-row-padding w3-margin-bottom">
+            <!--TEXTFIELD NOMBRE-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -64,6 +70,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD APELLIDO PATERNO-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -74,6 +81,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD APELLIDO MATERNO-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -84,6 +92,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD CELULAR-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -95,6 +104,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD DIRECCION-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -105,6 +115,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD CORREO ELECTRONICO-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -116,12 +127,14 @@
                 </div>
             </div>
         </div>
-
+        <!--DIV QUE SE MUESTRA MIENTRAS SE ACTUALIZA EL PROPIETARIO-->
         <div class="w3-margin w3-container w3-center" id="divWhenActualizar" style = "display: none">
             <div class="w3-bar">
+                <!--BOTON CANCELAR - NO GUARDA LOS CAMBIOS-->
                 <button type="button" class="w3-button w3-red w3-hover-blue" id="btnCancelarActualizar" onclick="clickCancelar()">
                     <i class="fa fa-times"></i>&#9;Cancelar
                 </button>
+                <!--BOTON GUARDAR - ACTUALIZA LOS DATOS DEL PROPIETARO-->
                 <button type="button" class="w3-button w3-green w3-hover-blue" id="btnGuardarActualizar" onclick="actualizarPropietario()">
                     <i class="fa fa-check"></i>&#9;Guardar
                 </button>

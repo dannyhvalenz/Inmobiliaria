@@ -17,12 +17,9 @@ function enviarPeticion(){
             //alert(x[0].getElementsByTagName("titulo")[0].textContent);
             var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
 
-            //alert(x[0].getElementsByTagName("contenido")[0].textContent);
-            var nombre = x[0].getElementsByTagName("nombre")[0].textContent;
-
-            var idAsesor = x[0].getElementsByTagName("id")[0].textContent;
-
             if (titulo == "Acceso correcto"){
+                var nombre = x[0].getElementsByTagName("nombre")[0].textContent;
+                var idAsesor = x[0].getElementsByTagName("id")[0].textContent;
                 var path = "http://localhost:8888/Sistema-Inmobiliaria/html/menu_Propietario.html?idAsesor="+idAsesor+"&nombre="+nombre;
                 window.location = path;
                 

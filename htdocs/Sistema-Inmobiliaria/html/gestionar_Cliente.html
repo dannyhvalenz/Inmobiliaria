@@ -41,21 +41,27 @@
     </style>
 </head>
 <body>
+    <!--FORMULARIO GESTIONAR CLIENTE-->
     <form class="w3-card-4">
         <header class="w3-container w3-orange w3-center ">
             <h1 class="w3-xxlarge w3-text-white" id="titulo">MOSTRAR CLIENTE</h1>
         </header>
+        <!--DIV DE BOTONES QUE APARECE SOLO SI EL ASESOR QUE REGISTRO EL INMUEBLE ES EL QUE ESTA CON LA SESION ACTIVA-->
         <div class="w3-bar w3-right-align" id="divWhenMostrar">
+            <!--BOTON ACTUALIZAR EL CLIENTE-->
             <button type="button" class="w3-button w3-hover-blue w3-text-blue" id="btnActualizar" onclick="clickActualizar()" title="Actualizar">
                 <i class="fa fa-edit"></i>&#9;Actualizar
             </button>
+            <!--BOTON ELIMINAR CLIENTE-->
             <button type="button" class="w3-button w3-hover-blue w3-text-blue" id="btnEliminarCliente" onclick="clickEliminar()" title="Eliminar">
                 <i class="fa fa-trash"></i>&#9;Eliminar
             </button>
         </div>
+        <!--DIV DE LOS TEXTFIELD-->
         <div class="w3-row-padding w3-margin-bottom">
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
+                    <!--TEXTFIELD NOMBRE DEL CLIENTE-->
                     <input
                         class="w3-input w3-animate-input w3-bar-item"
                         type="text"
@@ -66,6 +72,7 @@
             </div>
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
+                    <!--TEXTFIELD APELLIDO PATERNO-->
                     <input
                         class="w3-input w3-animate-input w3-bar-item"
                         type="text"
@@ -76,6 +83,7 @@
             </div>
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
+                    <!--TEXTFIELD APELLIDO MATERNO-->
                     <input
                         class="w3-input w3-animate-input w3-bar-item"
                         type="text"
@@ -86,6 +94,7 @@
             </div>
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
+                    <!--TEXTFIELD CELULAR-->
                     <input
                         class="w3-input w3-animate-input w3-bar-item"
                         type="number"
@@ -97,6 +106,7 @@
             </div>
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
+                    <!--TEXTFIELD CORREO ELECTRONICO-->
                     <input
                         class="w3-input w3-animate-input w3-bar-item"
                         type="email"
@@ -106,12 +116,14 @@
                 </div>
             </div>
         </div>
-
+        <!--DIV QUE APARECE AL PRESIONAR EL BOTON ACTUALIZAR-->
         <div class="w3-margin w3-container w3-center" id="divWhenActualizar" style = "display: none">
             <div class="w3-bar">
+                <!--BOTON QUE CANCELA LOS CAMBIOS AL CLIENTE-->
                 <button type="button" class="w3-button w3-red w3-hover-blue" id="btnCancelarActualizar" onclick="clickCancelar()">
                     <i class="fa fa-times"></i>&#9;Cancelar
                 </button>
+                <!--BOTON QUE ACTUALIZA AL CLIENTE-->
                 <button type="button" class="w3-button w3-green w3-hover-blue" id="btnGuardarActualizar" onclick="actualizarCliente()">
                     <i class="fa fa-check"></i>&#9;Guardar
                 </button>

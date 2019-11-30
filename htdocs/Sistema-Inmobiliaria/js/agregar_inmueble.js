@@ -77,6 +77,7 @@ function cerrarRegistro(){
 
 function guardarInmueble(){
     /* RECUPERAR DATOS DE LOS INPUT */
+    var camposVacios = new Boolean(false);
 
     var cmb = document.getElementById("cmbPropietario");
     idPropietario = cmb.options[cmb.selectedIndex].value;
@@ -94,9 +95,16 @@ function guardarInmueble(){
     var q = "idPropietario="+idPropietario+"&ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&precio="+precio+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble;
     
     // VALIDACION DE CAMPOS VACIOS
-    if (ciudad == null || ciudad == "", colonia == null || colonia == "", calle == null || calle == "", numExt == null || numExt == "",precio == null || precio == "", tipoTransaccion == null || tipoTransaccion == "", tipoInmueble == null || tipoInmueble == "") {
-        alert("Hay campos vacios");
-    } else {
+    var input = document.getElementsByTagName("input");
+    for (var i=0; i<input.length; i++){
+        if (input[i].id != "txtnumInt"){
+            if (input[i].value == "" || input[i].value == null) {
+                camposVacios = true;
+            }
+        }
+    }
+    
+    if (camposVacios == false) {
 
     // EN CASO DE QUE NO HAYA CAMPOS VACIOS SE HACE EL REQUEST A LA BD POR MEDIO DEL ARCHIVO .PL
         console.log("Agregar Inmueble");
@@ -109,12 +117,13 @@ function guardarInmueble(){
                 var x = respuesta.getElementsByTagName("resultado");
 
                 var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
-
+                console.log(titulo);
                 var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
 
                 if (titulo == "Nuevo inmueble"){
                     var id = x[0].getElementsByTagName("idInmueble")[0].textContent;
                     idInmueble = id;
+                    
                     if (tipoInmueble == "Casa") {
                         guardarCasa();
                     } else if (tipoInmueble == "Departamento") {
@@ -141,6 +150,8 @@ function guardarInmueble(){
         ); 
         xhr.responseType = "document";
         xhr.send(q);
+    } else if (camposVacios == true) {
+        alert("Hay campos vacios");
     }
 };
 
