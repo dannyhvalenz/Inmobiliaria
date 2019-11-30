@@ -39,6 +39,7 @@
         </style>
     </head>
     <body>
+        <!--FORMULARIO QUE PERMITE REGISTRAR UN PROPIETARIO-->
         <form class="w3-card-4">
             <header class="w3-container w3-orange w3-center ">
                 <h1 class="w3-xxlarge w3-text-white" >REGISTRO DE PROPIETARIO</h1>
@@ -47,6 +48,7 @@
             <div class="w3-row-padding w3-margin-bottom">
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
+                        <!--TEXTFIELD NOMBRE-->
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
@@ -57,6 +59,7 @@
                 </div>
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
+                        <!--TEXTFIELD APELLIDO PATERNO-->
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
@@ -67,6 +70,7 @@
                 </div>
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
+                        <!--TEXTFIELD APELLIDO MATERNO-->
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
@@ -77,6 +81,7 @@
                 </div>
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
+                        <!--TEXTFIELD CELULAR-->
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="number"
@@ -88,6 +93,7 @@
                 </div>
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
+                        <!--TEXTFIELD DIRECCION-->
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
@@ -98,6 +104,7 @@
                 </div>
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
+                        <!--TEXTFIELD CORREO ELECTRONICO-->
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="email"
@@ -108,11 +115,14 @@
                 </div>
             </div>
 
+            <!--DIV DE BOTONES-->
             <div class="w3-margin w3-container w3-center" id="divBotones">
                 <div class="w3-bar">
+                    <!--BOTON QUE CANCELA EL REGISTRO DEL PROPIETARIO-->
                     <button type="button" class="w3-button w3-red" id="btnCancelarPropietario" onclick="cerrarRegistro()">
                         <i class="fa fa-times"></i>&#9;Cancelar
                     </button>
+                    <!--BOTON PARA GUARDAR AL PROPIETARIO-->
                     <button type="button" class="w3-button w3-green" id="btnGuardarPropietario" onclick="guardarPropietario()">
                         <i class="fa fa-check"></i>&#9;Guardar
                     </button>
@@ -121,6 +131,6 @@
         </form>
     </body>
 
-    <!-- Scripts -->
+    <!-- SCRIPTS -->
     <script type="application/javascript" src="/Sistema-Inmobiliaria/js/agregar_propietario.js"></script>
 </html>

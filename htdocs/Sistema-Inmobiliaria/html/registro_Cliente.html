@@ -17,10 +17,7 @@
     />
     <link rel="stylesheet" href="/Sistema-Inmobiliaria/css/w3.css" />
     <link rel="stylesheet" href="/Sistema-Inmobiliaria/css/inicioSesion.css" />
-
-    <!-- Scripts -->
-    <script type="application/javascript" src="/Sistema-Inmobiliaria/js/agregar_cliente.js"></script>
-        
+  
     <style>
         * {
             margin: 0;
@@ -42,11 +39,13 @@
     </style>
 </head>
 <body>
+    <!--FORMULARIO DE REGISTRO DEL CLIENTE-->
     <form class="w3-card-4">
         <header class="w3-container w3-orange w3-center ">
             <h1 class="w3-xxlarge w3-text-white" >REGISTRO DE CLIENTE</h1>
         </header>
 
+        <!--TEXTFIELD NOMBRE-->
         <div class="w3-row-padding w3-margin-bottom">
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
@@ -58,6 +57,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD APELLIDO PATERNO-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -68,6 +68,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD APELLIDO MATERNO-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -78,6 +79,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD CELULAR-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -89,6 +91,7 @@
                     />
                 </div>
             </div>
+            <!--TEXTFIELD CORREO ELECTRONICO-->
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <input
@@ -101,16 +104,23 @@
             </div>
         </div>
 
+        <!--DIV BOTONES-->
         <div class="w3-margin w3-container w3-center" id="divBotones">
             <div class="w3-bar">
+                <!--BOTON QUE CANCELA EL REGISTRO DEL CLIENTE-->
                 <button type="button" class="w3-button w3-red" id="btnCancelarCliente" onclick="cerrarRegistro()">
                     <i class="fa fa-times"></i>&#9;Cancelar
                 </button>
+                <!--BOTON QUE GUARDA EL CLIENTE EN LA BD-->
                 <button type="button" class="w3-button w3-green" id="btnGuardarCliente" onclick="guardarCliente()">
                     <i class="fa fa-check"></i>&#9;Guardar
                 </button>
             </div>
         </div>
     </form>
+
+    <!-- Scripts -->
+    <script type="application/javascript" src="/Sistema-Inmobiliaria/js/agregar_cliente.js"></script>
+      
 </body>
 </html>

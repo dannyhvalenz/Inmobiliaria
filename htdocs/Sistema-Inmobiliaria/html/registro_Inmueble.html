@@ -46,7 +46,7 @@
                         </p>
                     </div>
                 </div> 
-
+                <!--TEXTFIELD CIUDAD-->
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -57,6 +57,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD COLONIA-->
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -67,6 +68,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD CALLE-->
                 <div class="w3-third">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -77,7 +79,7 @@
                         />
                     </div>
                 </div>
-                
+                <!--TEXTFIELD NUM EXTERIOR-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -88,6 +90,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD NUM INTERIOR-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -98,6 +101,7 @@
                         />
                     </div>
                 </div>
+                <!--TEXTFIELD PRECIO-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
                         <input
@@ -108,7 +112,7 @@
                         />
                     </div>
                 </div>
-
+                <!--COMBOBOX TIPO DE TRANSACCION-->
                 <div class="w3-third w3-container">
                     <div class="w3-bar-item w3-container w3-padding-16">
                         <p class="p_selector">Tipo de transaccion:
@@ -119,7 +123,7 @@
                         </p>
                     </div>
                 </div> 
-
+                <!--COMBOBOX TIPO DE INMUEBLE-->
                 <div class="w3-third w3-container">
                     <div class="w3-bar-item w3-container w3-padding-16">
                         <p class="p_selector">Tipo de Inmueble:
@@ -135,18 +139,21 @@
                         </p>
                     </div>
                 </div> 
-                
             </div>  
+            <!--DIV QUE CONTIENE EL FORMULARIO PARA LLENAR LOS CAMPOS DEPENDIENDO DEL TIPO DE INMUEBLE-->
             <div class="w3-container" id="divTipoPropiedad">
                 <div class="contenedor" id="contenido" >
                     <object></object>
                 </div>
             </div>  
+            <!--DIV DE BOTONES-->
             <div class="w3-margin w3-container w3-center">
                     <div class="w3-bar">
+                        <!--BOTON CANCELAR - CIERRA EL REGISTRO Y LIMPIA LOS CAMPOS-->
                         <button type="button" class="w3-button w3-red w3-hover-blue" id="btnCancelar" onclick="cerrarRegistro()">
                             <i class="fa fa-times"></i>&#9;Cancelar
                         </button>
+                        <!--BOTON GUARDAR - GUARDA EL INMUEBLE-->
                         <button type="button" class="w3-button w3-green w3-hover-blue" id="btnGuardar" onclick="guardarInmueble()">
                             <i class="fa fa-check"></i>&#9;Guardar
                         </button>
@@ -155,7 +162,7 @@
         </form>
     </body>
 
-    <!-- Scripts -->
+    <!--SCRIPTS-->
     <script type="application/javascript" src="/Sistema-Inmobiliaria/js/agregar_inmueble.js"></script>
     <script type="application/javascript" src="/Sistema-Inmobiliaria/js/tipoInmueble.js"></script>
 </html>
