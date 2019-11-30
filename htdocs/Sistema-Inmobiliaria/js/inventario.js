@@ -32,6 +32,7 @@ if (variable.get("ciudad") != null){
     cargarInmuebles("No");
 }
 
+// CARGA LOS INMUEBLES Y EN CASO DE NECESITAR ORDENARLOS LOS REGRESA ORDENADOS POR PRECIO ASCENDENTE O DESCENDENTE
 function cargarInmuebles(ordenarPor){
     var xhr = new XMLHttpRequest();
     var existeRespuesta = new Boolean (false);
@@ -71,9 +72,12 @@ function cargarInmuebles(ordenarPor){
     
 };
 
+// FILTRA LOS INMUEBLES Y REGRESA EL RESULTADO ORDENADO DEPENDIENDO EL CASO 
 function buscar(ordenarPor) {
     buscarActivo = true;
     var q;
+
+    // REVISA QUE NO QUEDEN CAMPOS VACIOS
     if (ciudad != "" && colonia != "" && tipoTransaccion != "" && tipoInmueble != "" && precioMin != "" && precioMax != "") {
         q = "ciudad="+ciudad+"&colonia="+colonia+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble+"&precioMin="+precioMin+"&precioMax="+precioMax+"&ordenarPor="+ordenarPor;
     } else {
@@ -124,6 +128,7 @@ function buscar(ordenarPor) {
     
 };
 
+// ORDENA POR PRECIO DESCENDENTE
 function precioDescendente() {
     if (buscarActivo == false){
         cargarInmuebles('Descendente');
@@ -132,6 +137,7 @@ function precioDescendente() {
     } 
 };
 
+// ORDENA POR PRECIO ASCENDENTE
 function precioAscendente() {
     if (buscarActivo == false){
         cargarInmuebles('Ascendente');
@@ -140,6 +146,7 @@ function precioAscendente() {
     }  
 };
 
+// RELLENA TODOS LOS CAMPOS NECESARIOS Y REGRESA TODAS LAS PROPIEDADES SIN FILTRARLAS ANTES
 function inventario() {
     var xhr = new XMLHttpRequest();
     var existeRespuesta = new Boolean (false);
@@ -157,6 +164,7 @@ function inventario() {
             }
             
             if (existeRespuesta == true){
+                // RELLENA LOS COMBOBOX COLONIAS Y CIUDADES CON LOS DATOS DE LA BD
                 var selcolonias = document.getElementById('colonias');
                 var selciudades = document.getElementById('ciudades');
                 
@@ -203,12 +211,14 @@ function inventario() {
     xhr.send();
 };
 
+// FUNCION QUE LIMPIA LOS FILTROS
 function limpiarBusqueda () {
     buscarActivo = false;
     var path = "http://localhost:8888/Sistema-Inmobiliaria/html/inventario.html";
     window.open(path,"_parent");
 };
 
+// FUNCION PARA EL BOTON ABRE LA VENTANA CON LA INFO DEL INMUEBLE
 function w3_open_actualizar(id) {
     idInmueble = id;
     abrirFormularioInmueble();
@@ -217,6 +227,7 @@ function w3_open_actualizar(id) {
 
 };
 
+// SOLICITA LA INFORMACION DE CIERTO INMUEBLE
 function abrirFormularioInmueble(){
     console.log("Abrir formulario inmueble");
     var q = "idInmueble="+idInmueble;
@@ -257,11 +268,12 @@ function abrirFormularioInmueble(){
     xhr.send(q);
 };
 
+// CIERRA LA VENTANA CON LA INFO DEL INMUEBLE
 function cerrarPopup() {
     document.getElementById("myModal").style.display = "none";
 };
 
-
+// DEPENDIENDO DEL TIPO DE INMUEBLE SACA LA INFORMACION RESTANTE DEL MISMO
 function cargarDatosTipoInmueble(tipoPropiedad){
     if (tipoPropiedad == "Casa"){
         mostrarInfoCasa();
@@ -278,6 +290,7 @@ function cargarDatosTipoInmueble(tipoPropiedad){
     }
 }
 
+// RECUPERA LA INFOMACION DEL LOCAL
 function mostrarInfoLocal(){
     console.log("Abrir info Local");
     var q = "idInmueble="+idInmueble;
@@ -316,6 +329,7 @@ function mostrarInfoLocal(){
     xhr.send(q);
 };
 
+// RECUPERA LA INFOMACION DEL DEPARTAMENTO
 function mostrarInfoDepartamento(){
     console.log("Abrir info departamento");
     var q = "idInmueble="+idInmueble;
@@ -354,6 +368,7 @@ function mostrarInfoDepartamento(){
     xhr.send(q);
 };
 
+// RECUPERA LA INFOMACION DEL EDIFICIO
 function mostrarInfoEdificio(){
     console.log("Abrir info edificio");
     var q = "idInmueble="+idInmueble;
@@ -392,6 +407,7 @@ function mostrarInfoEdificio(){
     xhr.send(q);
 };
 
+// RECUPERA LA INFOMACION DE LA OFICINA
 function mostrarInfoOficina(){
     console.log("Abrir info oficina");
     var q = "idInmueble="+idInmueble;
@@ -430,6 +446,7 @@ function mostrarInfoOficina(){
     xhr.send(q);
 };
 
+// RECUPERA LA INFOMACION DE LA CASA
 function mostrarInfoCasa(){
     console.log("Abrir info Casa");
     var q = "idInmueble="+idInmueble;
@@ -468,6 +485,7 @@ function mostrarInfoCasa(){
     xhr.send(q);
 };
 
+// RECUPERA LA INFOMACION DEL TERRENO
 function mostrarInfoTerreno(){
     console.log("Abrir info terreno");
     var q = "idInmueble="+idInmueble;

@@ -7,6 +7,7 @@ var outerHTML;
 var idAsesor;
 var nombreAsesor;
 
+// RECUPERA LOS PARAMETROS DEL URL PARA PONER EL NOMBRE DEL ASESOR EN EL LABEL CORRESPONDIENTE
 variable = (new URL(document.location)).searchParams;
 if (variable.get("idAsesor") != null){
     idAsesor = variable.get("idAsesor");
@@ -14,12 +15,14 @@ if (variable.get("idAsesor") != null){
     outerHTML = variable.get("link");
     outerHTML = outerHTML+"&nombre="+nombreAsesor;
 
+    // SUSTITUYE EL URL QUE APARECE PARA NO MOSTRAR LOS PARAMETROS MANDADOS
     history.replaceState({}, null, "/Sistema-Inmobiliaria/html/menu_Cliente.html");
     
 } else {
     alert("No se pudo recuperar la informacion de la base de datos");
 }
 
+// FUNCION QUE LIMPIA LOS REGISTROS Y CIERRA EL REGISTRO
 function cerrarRegistro(){
     /* SE LIMPIAN TODOS LOS INPUT */
     document.getElementById("txtnombre").value = '';
@@ -31,6 +34,7 @@ function cerrarRegistro(){
     window.open(outerHTML,"_parent");
 }
 
+// FUNCION GUARDA AL CLIENTE
 function guardarCliente(){
     /* RECUPERAR DATOS DE LOS INPUT */
     var nombre = document.getElementById("txtnombre").value;

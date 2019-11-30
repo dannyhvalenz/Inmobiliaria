@@ -1,3 +1,4 @@
+// FUNCION QUE HACE LA ANIMACION DE ABRIR EL SIDEBAR
 function w3_open_sidebar() {
     document.getElementById("main").style.marginLeft = "25%";
     document.getElementById("mySidebar").style.width = "25%";
@@ -7,6 +8,7 @@ function w3_open_sidebar() {
     document.getElementById("barra_superior").style.float = "right";
 }
 
+// FUNCION QUE HACE LA ANIMACION DE ABRIR EL SIDEBAR
 function w3_close_sidebar() {
     document.getElementById("main").style.marginLeft = "0%";
     document.getElementById("mySidebar").style.display = "none";

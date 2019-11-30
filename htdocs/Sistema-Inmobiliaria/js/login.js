@@ -4,6 +4,7 @@ if(btnIniciarSesion){
     sesio.addEventListener("click", enviarPeticion);
 }
 
+// ENVIA LA PETICION PARA BUSCAR SI EXISTE EL USUARIO Y CONTRASEÑA EN LA BS
 function enviarPeticion(){
     console.log("inicio");
     var xhr = new XMLHttpRequest();

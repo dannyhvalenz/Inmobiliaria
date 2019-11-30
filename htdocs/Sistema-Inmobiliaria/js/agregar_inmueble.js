@@ -13,6 +13,7 @@ var outerHTML;
 var idAsesor;
 var nombreAsesor;
 
+// RECUPERA LOS PARAMETROS DEL URL
 variable = (new URL(document.location)).searchParams;
 if (variable.get("idAsesor") != null){
     idAsesor = variable.get("idAsesor");
@@ -26,6 +27,8 @@ if (variable.get("idAsesor") != null){
     alert("No se pudo recuperar la informacion de la base de datos");
 }
 
+// FUNCION QUE CARGA LOS PROPIETARIOS REGISTRADOS POR EL ASESOR EN EL COMBOBOX
+// Y ASI PODER SELECCIONAR ALGUNO AL REGISTRAR UN INMUEBLE
 function cargarPropietariosComboBox(id) {
     var xhr = new XMLHttpRequest();
     var existeRespuesta = new Boolean (false);
@@ -63,7 +66,7 @@ function cargarPropietariosComboBox(id) {
     xhr.send(q);
 }
 
-
+// FUNCION QUE CIERRA REGISTRO DEL INMUEBLE Y LIMPIA LOS CAMPOS
 function cerrarRegistro(){
     /* SE LIMPIAN TODOS LOS INPUT */
     document.getElementById("txtciudad").value = '';
@@ -75,6 +78,7 @@ function cerrarRegistro(){
     window.open(outerHTML,"_parent");
 }
 
+// FUNCION QUE GUARDA EL INMUEBLE
 function guardarInmueble(){
     /* RECUPERAR DATOS DE LOS INPUT */
     var camposVacios = new Boolean(false);
@@ -124,6 +128,7 @@ function guardarInmueble(){
                     var id = x[0].getElementsByTagName("idInmueble")[0].textContent;
                     idInmueble = id;
                     
+                    // DEPENDIENDO DEL TIPO DE INMUEBLE ES A LA FUNCION A LA QUE NOS REDIRIGE
                     if (tipoInmueble == "Casa") {
                         guardarCasa();
                     } else if (tipoInmueble == "Departamento") {
@@ -155,6 +160,7 @@ function guardarInmueble(){
     }
 };
 
+// FUNCION QUE GUARDA LOS CAMPO DE CASA
 function guardarCasa(){
     // Obtener los datos de los input
     var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -309,6 +315,7 @@ function guardarCasa(){
 
 };
 
+// FUNCION QUE GUARDA LOS CAMPOS DE DEPARTAMENTO
 function guardarDepartamento(){
     // Obtener los datos de los input
     var metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
@@ -441,6 +448,7 @@ function guardarDepartamento(){
 
 };
 
+// FUNCION QUE GUARDA LOS CAMPOS DE EDIFICIO
 function guardarEdificio(){
     // Obtener los datos de los input
     var metrosConstruccion = document.getElementById("txtMetrosConstruccion").value;
@@ -492,6 +500,8 @@ function guardarEdificio(){
 
 };
 
+
+// FUNCION QUE GUARDA LOS CAMPOS DE LOCAL
 function guardarLocal(){
     // Obtener los datos de los input
     var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -543,6 +553,7 @@ function guardarLocal(){
 
 };
 
+// FUNCION QUE GUARDA LOS CAMPOS DE OFICINA
 function guardarOficina(){
     // Obtener los datos de los input
     var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;
@@ -645,6 +656,7 @@ function guardarOficina(){
 
 };
 
+// FUNCION QUE GUARDA LOS CAMPOS DE TERRENO
 function guardarTerreno(){
     // Obtener los datos de los input
     var metrosCuadrados = document.getElementById("txtMetrosCuadrados").value;

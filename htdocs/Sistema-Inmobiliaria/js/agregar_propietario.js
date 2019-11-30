@@ -33,6 +33,7 @@ function cerrarRegistro(){
     window.open(outerHTML,"_parent");
 }
 
+// FUNCION PARA GUARDAR AL PROPIETARIO
 function guardarPropietario(){
     /* RECUPERAR DATOS DE LOS INPUT */
     var nombre = document.getElementById("txtnombre").value;
