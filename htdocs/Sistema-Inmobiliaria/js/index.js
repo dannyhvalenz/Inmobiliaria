@@ -64,12 +64,12 @@ function index() {
 function buscar() {
     var ciudad = document.getElementById("ciudades").value;
     var colonia = document.getElementById("colonias").value;
+    var tipoTransaccion = document.getElementById("tipoTransaccion").value;
     var tipoInmueble = document.getElementById("tipoInmueble").value;
     var precioMin = document.getElementById("precioMin").value;
     var precioMax = document.getElementById("precioMax").value;
 
     var q = "ciudad="+ciudad+"&colonia="+colonia+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble+"&precioMin="+precioMin+"&precioMax="+precioMax;
-    
     var path = "http://localhost:8888/Sistema-Inmobiliaria/html/inventario.html?"+q;
     window.open(path,"_parent");
 };

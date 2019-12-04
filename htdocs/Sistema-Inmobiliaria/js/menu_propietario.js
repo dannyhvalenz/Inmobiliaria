@@ -44,7 +44,7 @@ function buscar() {
                 if (existeRespuesta == true){
                     xs = new XMLSerializer();
                     document.getElementById('box').innerHTML = '';
-                        for (i=0; i<x.length; ++i) {
+                    for (i=0; i<x.length; ++i) {
                         document.getElementById('box').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
                     }
                 } else {

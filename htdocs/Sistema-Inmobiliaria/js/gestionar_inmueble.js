@@ -73,6 +73,7 @@ var edadEdificio;
 var outerHTML;
 var idAsesor;
 var nombreAsesor;
+var q;
 
 document.getElementById("cmbPropietario").setAttribute("disabled","disabled");
 document.getElementById("txtciudad").setAttribute("disabled","disabled");
@@ -439,13 +440,16 @@ function getNombrePropietario(id){
     xhr.send(q);
 }
 
-// ACTUALIZA AL INMUEBLE
-function actualizarInmueble(){
-
-    // RECUPERAR DATOS DE LOS INPUT
+// FUNCION QUE BUSCA UN INMUBLE CON LA MISMA CIUDAD, COLONIA, CALLE, NUMERO EXTERIOR E INTERIOR, TIPO DE TRANSACCION
+// Y TIPO DE INMUEBLE PARA VERIFICAR QUE NO SE VAYA A DUPLICAR 
+function buscarDuplicado() {
+    /* RECUPERAR DATOS DE LOS INPUT */
     ciudad = document.getElementById("txtciudad").value;
+    ciudad = primeraMayscula(ciudad.toLowerCase());
     colonia = document.getElementById("txtcolonia").value;
+    colonia = primeraMayscula(colonia.toLowerCase());
     calle = document.getElementById("txtcalle").value;
+    calle = primeraMayscula(calle.toLowerCase());
     numExt = document.getElementById("txtnumExt").value;
     numInt = document.getElementById("txtnumInt").value;
     precio = document.getElementById("txtprecio").value;
@@ -454,55 +458,82 @@ function actualizarInmueble(){
     tipoTransaccion = document.getElementById("tipoTransaccion").value;
     var cmb = document.getElementById("cmbPropietario");
     idPropietario = cmb.options[cmb.selectedIndex].value;
-
+    
+    
+    /* CREACION DEL QUERY */
+    var query = "ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&tipoInmueble="+tipoInmueble+"&tipoTransaccion="+tipoTransaccion;
+    /* VALIDACION DE CAMPOS VACIOS */
     var camposVacios = new Boolean(false);
 
     if (ciudad == null || ciudad == "" || colonia == null || colonia == "" || calle == null || calle == "" || numExt == null || numExt == "" || precio == null || precio == ""){
             camposVacios = true;
-    }
-
-    // CREACION DEL QUERY
-    var q = "idInmueble="+idInmueble+"&ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&precio="+precio
-            +"&tipoInmueble="+tipoInmueble+"&tipoTransaccion="+tipoTransaccion+"&idPropietario="+idPropietario;
-    console.log(q);
-    // VALIDACION DE CAMPOS VACIOS
-    if (camposVacios == true) {
-        alert("Hay campos vacios, verifica que todos los campos esten llenos");
     } else {
         var xhr = new XMLHttpRequest();
-        var titulo;
-        var contenido;
         xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4){
+            if(xhr.readyState==4 && xhr.status==200){
                 var respuesta = xhr.responseXML;
-                console.log("Actualizar inmueble")
                 console.log(xhr.responseXML);
-                var x = respuesta.getElementsByTagName("resultado");
-
-                titulo = x[0].getElementsByTagName("titulo")[0].textContent;
-                contenido = x[0].getElementsByTagName("contenido")[0].textContent;
-
-                if (titulo == "Inmueble actualizado"){
-                    //alert(contenido);
-                    tipoInmueble = x[0].getElementsByTagName("tipoInmueble")[0].textContent;
-                    console.log("Tipo Inmueble a Actualizar = " + tipoInmueble);
-                    //window.open(outerHTML,"_parent");
-
-                    actualizarTipoInmueble(tipoInmueble);
-                } else if (titulo == "Error de conexion"){
+                x = respuesta.getElementsByTagName('resultado');
+                
+                var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+                console.log(titulo);
+                if (titulo == "Inmueble duplicado"){
+                    var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
                     alert(contenido);
+                } else if (titulo == "Inmueble no duplicado"){
+                    q = "idInmueble="+idInmueble+"&ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&precio="+precio
+                        +"&tipoInmueble="+tipoInmueble+"&tipoTransaccion="+tipoTransaccion+"&idPropietario="+idPropietario;
+    
+                    actualizarInmueble();
                 }
             }
         }
 
-        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/modificarInmueble.pl", true);
+        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/verificarNuevoInmueble.pl", true);
         xhr.setRequestHeader(
-            'Content-type', 
-            'application/x-www-form-urlencoded'
+        'Content-type', 
+        'application/x-www-form-urlencoded'
         ); 
         xhr.responseType = "document";
-        xhr.send(q);
+        xhr.send(query);
+    }  
+}
+
+// ACTUALIZA AL INMUEBLE
+function actualizarInmueble(){
+    var xhr = new XMLHttpRequest();
+    var titulo;
+    var contenido;
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            var respuesta = xhr.responseXML;
+            console.log("Actualizar inmueble")
+            console.log(xhr.responseXML);
+            var x = respuesta.getElementsByTagName("resultado");
+
+            titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+            contenido = x[0].getElementsByTagName("contenido")[0].textContent;
+
+            if (titulo == "Inmueble actualizado"){
+                //alert(contenido);
+                tipoInmueble = x[0].getElementsByTagName("tipoInmueble")[0].textContent;
+                console.log("Tipo Inmueble a Actualizar = " + tipoInmueble);
+                //window.open(outerHTML,"_parent");
+
+                actualizarTipoInmueble(tipoInmueble);
+            } else if (titulo == "Error de conexion"){
+                alert(contenido);
+            }
+        }
     }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/modificarInmueble.pl", true);
+    xhr.setRequestHeader(
+        'Content-type', 
+        'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
 };
 
 // DEPENDIENDO DEL TIPO DE INMUEBLE ES LA FUNCION QUE SE LLAMA
@@ -1894,3 +1925,7 @@ function cargarTerreno(){
     xhr.send(q);
 }
 
+// FUNCION QUE HACE QUE LA PRIMERA LETRA SEA MAYUSCULA Y LAS DEMAS SEAN MINUSCULAS
+function primeraMayscula(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

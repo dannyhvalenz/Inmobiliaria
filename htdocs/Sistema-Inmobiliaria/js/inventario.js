@@ -8,25 +8,32 @@ var tipoTransaccion = "";
 var buscarActivo = new Boolean(false);
 var idInmueble;
 
+var ciudadRecuperada;
+var coloniaRecuperada;
+var tipoInmuebleRecuperado;
+var precioMinRecuperado;
+var precioMaxRecuperado;
+var tipoTransaccionRecuperado;
 // DATOS INMUEBLES
 var precio;
+var query;
 
 if (variable.get("ciudad") != null){
-    ciudad = variable.get("ciudad");
-    colonia = variable.get("colonia");
-    tipoInmueble = variable.get("tipoInmueble");
-    precioMin = variable.get("precioMin");
-    precioMax = variable.get("precioMax");
-    tipoTransaccion = variable.get("tipoTransaccion");
+    ciudadRecuperada = variable.get("ciudad");
+    console.log("ciudadRecuperada"+ciudadRecuperada);
+    coloniaRecuperada = variable.get("colonia");
+    tipoInmuebleRecuperado = variable.get("tipoInmueble");
+    precioMinRecuperado = variable.get("precioMin");
+    precioMaxRecuperado = variable.get("precioMax");
+    tipoTransaccionRecuperado = variable.get("tipoTransaccion");
 
-    document.getElementById("ciudades").value = ciudad;
-    document.getElementById("colonias").value = colonia;
-    document.getElementById("tipoTransaccion").value = tipoTransaccion;
-    document.getElementById("tipoInmueble").value = tipoInmueble;
-    document.getElementById("precioMin").value = precioMin;
-    document.getElementById("precioMax").value = precioMax;
+    query = "ciudad="+ciudadRecuperada+"&colonia="+coloniaRecuperada+"&tipoInmueble="+tipoInmuebleRecuperado+"&tipoTransaccion="+tipoTransaccionRecuperado+"&precioMin="+precioMinRecuperado+"&precioMax="+precioMaxRecuperado+"&ordenarPor=No";
+    document.getElementById("tipoTransaccion").value = tipoTransaccionRecuperado;
+    document.getElementById("tipoInmueble").value = tipoInmuebleRecuperado;
+    document.getElementById("precioMin").value = precioMinRecuperado;
+    document.getElementById("precioMax").value = precioMaxRecuperado;
+    document.getElementById("titulo").innerHTML = 'Cargando busqueda';
     inventario();
-    buscar("No");
 } else {
     inventario();
     cargarInmuebles("No");
@@ -40,6 +47,7 @@ function cargarInmuebles(ordenarPor){
     xhr.onreadystatechange = function(){
         if(xhr.readyState==4 && xhr.status==200){
             var respuesta = xhr.responseXML;
+            var respuestaTexto = new XMLSerializer().serializeToString(respuesta);
             console.log("Cargar Inmuebles");
             console.log(xhr.responseXML);
             x = respuesta.getElementsByTagName('resultado');
@@ -52,13 +60,25 @@ function cargarInmuebles(ordenarPor){
             
             if (existeRespuesta == true){
                 xs = new XMLSerializer();
-                document.getElementById('box').innerHTML = '';
+
+                var coincidencias = x[0].childNodes[0];
+
+                if (coincidencias != null) {
+                    document.getElementById("titulo").style.display = "none";
                     for (i=0; i<x.length; ++i) {
-                    document.getElementById('box').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                        
+                        document.getElementById('box2').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                    }
+                } else {
+                    document.getElementById("titulo").style.display = "block";
+                    document.getElementById('box2').innerHTML = '';
+                    document.getElementById("titulo").innerHTML = 'No hay coincidencias';
                 }
             } else {
                 alert("Error de conexion con la base de datos");
             }
+            
+            
         }
     }
 
@@ -72,11 +92,63 @@ function cargarInmuebles(ordenarPor){
     
 };
 
+// BUSQUEDA INICIAL CON FIILTROS DESDE EL INDEX
+function buscarInicial(q) {
+    buscarActivo = true;
+    console.log("Busqueda inicial inmueble - Cliente");
+    console.log("Busqueda inicial query = " + q);
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            var respuestaTexto = new XMLSerializer().serializeToString(respuesta);
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+
+                var coincidencias = x[0].childNodes[0];
+
+                if (coincidencias != null) {
+                    document.getElementById("titulo").style.display = "none";
+                    for (i=0; i<x.length; ++i) {
+                        
+                        document.getElementById('box2').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                    }
+                } else {
+                    document.getElementById("titulo").style.display = "block";
+                    document.getElementById('box2').innerHTML = '';
+                    document.getElementById("titulo").innerHTML = 'No hay coincidencias';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/buscarInmuebleCliente.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+    
+};
+
 // FILTRA LOS INMUEBLES Y REGRESA EL RESULTADO ORDENADO DEPENDIENDO EL CASO 
 function buscar(ordenarPor) {
     buscarActivo = true;
     var q;
-
+    
     // REVISA QUE NO QUEDEN CAMPOS VACIOS
     if (ciudad != "" && colonia != "" && tipoTransaccion != "" && tipoInmueble != "" && precioMin != "" && precioMax != "") {
         q = "ciudad="+ciudad+"&colonia="+colonia+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble+"&precioMin="+precioMin+"&precioMax="+precioMax+"&ordenarPor="+ordenarPor;
@@ -90,6 +162,7 @@ function buscar(ordenarPor) {
     
         q = "ciudad="+ciudad+"&colonia="+colonia+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble+"&precioMin="+precioMin+"&precioMax="+precioMax+"&ordenarPor="+ordenarPor;
     }
+    history.replaceState({}, null, "http://localhost:8888/Sistema-Inmobiliaria/html/inventario.html?&"+q);
     console.log("Buscar inmueble - Cliente");
     console.log(q);
     var xhr = new XMLHttpRequest();
@@ -97,6 +170,7 @@ function buscar(ordenarPor) {
     xhr.onreadystatechange = function(){
         if(xhr.readyState==4 && xhr.status==200){
             var respuesta = xhr.responseXML;
+            var respuestaTexto = new XMLSerializer().serializeToString(respuesta);
             console.log(xhr.responseXML);
             x = respuesta.getElementsByTagName('resultado');
             
@@ -105,12 +179,22 @@ function buscar(ordenarPor) {
             } else {
                 existeRespuesta = false;
             }
-            
+
             if (existeRespuesta == true){
                 xs = new XMLSerializer();
-                document.getElementById('box').innerHTML = '';
+
+                var coincidencias = x[0].childNodes[0];
+
+                if (coincidencias != null) {
+                    document.getElementById("titulo").style.display = "none";
                     for (i=0; i<x.length; ++i) {
-                    document.getElementById('box').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                        
+                        document.getElementById('box2').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                    }
+                } else {
+                    document.getElementById("titulo").style.display = "block";
+                    document.getElementById('box2').innerHTML = '';
+                    document.getElementById("titulo").innerHTML = 'No hay coincidencias';
                 }
             } else {
                 alert("Error de conexion con la base de datos");
@@ -195,7 +279,10 @@ function inventario() {
                         cadenaColonias = cadenaColonias + colonia;   
                     }
                 }
-                
+
+                document.getElementById("ciudades").value = ciudadRecuperada;
+                document.getElementById("colonias").value = coloniaRecuperada;
+                buscarInicial(query);
             } else {
                 alert("Error de conexion con la base de datos");
             }

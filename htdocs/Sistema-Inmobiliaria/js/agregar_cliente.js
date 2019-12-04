@@ -6,6 +6,7 @@ var correo;
 var outerHTML;
 var idAsesor;
 var nombreAsesor;
+var q;
 
 // RECUPERA LOS PARAMETROS DEL URL PARA PONER EL NOMBRE DEL ASESOR EN EL LABEL CORRESPONDIENTE
 variable = (new URL(document.location)).searchParams;
@@ -34,55 +35,91 @@ function cerrarRegistro(){
     window.open(outerHTML,"_parent");
 }
 
-// FUNCION GUARDA AL CLIENTE
-function guardarCliente(){
+// FUNCION QUE VERIFICA QUE EL CLIENTE NO ESTE DUPLICADO
+function buscarDuplicado() {
     /* RECUPERAR DATOS DE LOS INPUT */
     var nombre = document.getElementById("txtnombre").value;
+    nombre = primeraMayscula(nombre.toLowerCase());
     var apellidoP = document.getElementById("txtapellidoP").value;
+    apellidoP = primeraMayscula(apellidoP.toLowerCase());
     var apellidoM = document.getElementById("txtapellidoM").value;
+    apellidoM = primeraMayscula(apellidoM.toLowerCase());
     var celular = document.getElementById("txtcelular").value;
     var correo = document.getElementById("txtcorreo").value;
     var idAsesor = "1";
 
     /* CREACION DEL QUERY */
-    var q = "nombre="+nombre+"&"+"apellidoP="+apellidoP+"&"+"apellidoM="+apellidoM+"&"+"celular="+celular+"&"+"correo="+correo+"&"+"idAsesor="+idAsesor;
-    
+    var query = "celular="+celular+"&"+"correo="+correo;
     /* VALIDACION DE CAMPOS VACIOS */
     if (nombre == null || nombre == "", apellidoP == null || apellidoP == "", apellidoM == null || apellidoM == "", celular == null || celular == "", correo == null || correo == "") {
         alert("Hay campos vacios");
     } else {
-
-    /* EN CASO DE QUE NO HAYA CAMPOS VACIOS SE HACE EL REQUEST A LA BD POR MEDIO DEL ARCHIVO .PL */
-        console.log("Agregar cliente");
         var xhr = new XMLHttpRequest();
-        var titulo;
-        var contenido;
         xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4){
+            if(xhr.readyState==4 && xhr.status==200){
                 var respuesta = xhr.responseXML;
                 console.log(xhr.responseXML);
-
-                var x = respuesta.getElementsByTagName("resultado");
-
+                x = respuesta.getElementsByTagName('resultado');
+                
                 var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
-
-                var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
-
-                if (titulo == "Nuevo cliente"){
+                console.log(titulo);
+                if (titulo == "Cliente duplicado"){
+                    var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
                     alert(contenido);
-                    window.open(outerHTML,"_parent");
-                } else if (titulo == "Error de conexion"){
-                    alert(contenido);
+                } else if (titulo == "Cliente no duplicado"){
+                    q = "nombre="+nombre+"&"+"apellidoP="+apellidoP+"&"+"apellidoM="+apellidoM+"&"+"celular="+celular+"&"+"correo="+correo+"&"+"idAsesor="+idAsesor;
+                    
+                    guardarCliente();
                 }
             }
         }
 
-        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/agregarCliente.pl", true);
+        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/verificarNuevoCliente.pl", true);
         xhr.setRequestHeader(
-            'Content-type', 
-            'application/x-www-form-urlencoded'
+        'Content-type', 
+        'application/x-www-form-urlencoded'
         ); 
         xhr.responseType = "document";
-        xhr.send(q);
+        xhr.send(query);
+    }  
+}
+
+// FUNCION GUARDA AL CLIENTE
+function guardarCliente(){
+   console.log("Agregar cliente");
+    var xhr = new XMLHttpRequest();
+    var titulo;
+    var contenido;
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+
+            var x = respuesta.getElementsByTagName("resultado");
+
+            var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+
+            var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
+
+            if (titulo == "Nuevo cliente"){
+                alert(contenido);
+                window.open(outerHTML,"_parent");
+            } else if (titulo == "Error de conexion"){
+                alert(contenido);
+            }
+        }
     }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/agregarCliente.pl", true);
+    xhr.setRequestHeader(
+        'Content-type', 
+        'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
 };
+
+// FUNCION QUE HACE QUE LA PRIMERA LETRA SEA MAYUSCULA Y LAS DEMAS SEAN MINUSCULAS
+function primeraMayscula(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

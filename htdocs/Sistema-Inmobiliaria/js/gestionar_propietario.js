@@ -9,6 +9,7 @@ var correo;
 var outerHTML;
 var idPropietario;
 var nombreAsesor;
+var q;
 
 variable = (new URL(document.location)).searchParams;
 if (variable.get("idPropietario") != null){
@@ -114,16 +115,15 @@ function cargarPropietario(id){
     xhr.send(q);
 }
 
-function ShowResults(value) {
-    alert(value);
- }
-
- // FUNCION QUE PERMITE ACUTALIZAR AL PROPIETARIO
-function actualizarPropietario(){
+// FUNCION QUE VERIFICA QUE EL CLIENTE NO ESTE DUPLICADO Y EN CASO DE NO ESTAR DUPLICADO LLAMA A LA FUNCION GUARDAR PROPIETARIO
+function buscarDuplicado() {
     /* RECUPERAR DATOS DE LOS INPUT */
     nombre = document.getElementById("txtnombre").value;
+    nombre = primeraMayscula(nombre.toLowerCase());
     apellidoP = document.getElementById("txtapellidoP").value;
+    apellidoP = primeraMayscula(apellidoP.toLowerCase());
     apellidoM = document.getElementById("txtapellidoM").value;
+    apellidoM = primeraMayscula(apellidoM.toLowerCase());
     celular = document.getElementById("txtcelular").value;
     direccion = document.getElementById("txtdireccion").value;
     correo = document.getElementById("txtcorreo").value;
@@ -137,67 +137,92 @@ function actualizarPropietario(){
             }
         }
     }
-
     /* CREACION DEL QUERY */
-    var q = "nombre="+nombre+"&"+"apellidoP="+apellidoP+"&"+"apellidoM="+apellidoM+"&"
-        +"celular="+celular+"&"+"direccion="+direccion+"&"+"correo="+correo+"&"
-        +"idPropietario="+idPropietario;
-
+    var query = "celular="+celular+"&"+"correo="+correo;
     /* VALIDACION DE CAMPOS VACIOS */
     if (camposVacios == true) {
         alert("Hay campos vacios, verifica que todos los campos esten llenos");
     } else {
-
-    /* EN CASO DE QUE NO HAYA CAMPOS VACIOS SE HACE EL REQUEST A LA BD POR MEDIO DEL ARCHIVO .PL */
-        
-        console.log("Actualizar Propietario");
         var xhr = new XMLHttpRequest();
-        var titulo;
-        var contenido;
         xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4){
+            if(xhr.readyState==4 && xhr.status==200){
                 var respuesta = xhr.responseXML;
                 console.log(xhr.responseXML);
-                var x = respuesta.getElementsByTagName("resultado");
-
-                titulo = x[0].getElementsByTagName("titulo")[0].textContent;
-                contenido = x[0].getElementsByTagName("contenido")[0].textContent;
-
-                if (titulo == "Propietario actualizado"){
+                x = respuesta.getElementsByTagName('resultado');
+                
+                var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+                console.log(titulo);
+                if (titulo == "Propietario duplicado"){
+                    var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
                     alert(contenido);
-                    outerHTML = outerHTML+"&nombre="+nombreAsesor;
-                    window.open(outerHTML,"_parent");
-                    document.getElementById("titulo").innerHTML = "MOSTRAR PROPIETARIO";
-                    document.getElementById("divWhenMostrar").style.display = "block";
-                    document.getElementById("divWhenActualizar").style.display = "none";
-                    
-                    document.getElementById("txtnombre").setAttribute("disabled","disabled");
-                    document.getElementById("txtapellidoP").setAttribute("disabled","disabled");
-                    document.getElementById("txtapellidoM").setAttribute("disabled","disabled");
-                    document.getElementById("txtcelular").setAttribute("disabled","disabled");
-                    document.getElementById("txtdireccion").setAttribute("disabled","disabled");
-                    document.getElementById("txtcorreo").setAttribute("disabled","disabled");
-
-                    document.getElementById("txtnombre").value = nombre;
-                    document.getElementById("txtapellidoP").value = apellidoP;
-                    document.getElementById("txtapellidoM").value = apellidoM;
-                    document.getElementById("txtcelular").value = celular;
-                    document.getElementById("txtdireccion").value = direccion;
-                    document.getElementById("txtcorreo").value = correo;
-                } else if (titulo == "Error de conexion"){
-                    alert(contenido);
+                } else if (titulo == "Propietario no duplicado"){
+                     q = "nombre="+nombre+"&"+"apellidoP="+apellidoP+"&"+"apellidoM="+apellidoM+"&"
+                        +"celular="+celular+"&"+"direccion="+direccion+"&"+"correo="+correo+"&"
+                        +"idPropietario="+idPropietario;
+                    guardarPropietario();
                 }
             }
         }
 
-        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/modificarPropietario.pl", true);
+        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/verificarNuevoPropietario.pl", true);
         xhr.setRequestHeader(
-            'Content-type', 
-            'application/x-www-form-urlencoded'
+        'Content-type', 
+        'application/x-www-form-urlencoded'
         ); 
         xhr.responseType = "document";
-        xhr.send(q);
+        xhr.send(query);
+    }  
+}
+
+ // FUNCION QUE PERMITE ACUTALIZAR AL PROPIETARIO
+function actualizarPropietario(){
+    console.log("Actualizar Propietario");
+    var xhr = new XMLHttpRequest();
+    var titulo;
+    var contenido;
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
+            var x = respuesta.getElementsByTagName("resultado");
+
+            titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+            contenido = x[0].getElementsByTagName("contenido")[0].textContent;
+
+            if (titulo == "Propietario actualizado"){
+                alert(contenido);
+                outerHTML = outerHTML+"&nombre="+nombreAsesor;
+                window.open(outerHTML,"_parent");
+                document.getElementById("titulo").innerHTML = "MOSTRAR PROPIETARIO";
+                document.getElementById("divWhenMostrar").style.display = "block";
+                document.getElementById("divWhenActualizar").style.display = "none";
+                
+                document.getElementById("txtnombre").setAttribute("disabled","disabled");
+                document.getElementById("txtapellidoP").setAttribute("disabled","disabled");
+                document.getElementById("txtapellidoM").setAttribute("disabled","disabled");
+                document.getElementById("txtcelular").setAttribute("disabled","disabled");
+                document.getElementById("txtdireccion").setAttribute("disabled","disabled");
+                document.getElementById("txtcorreo").setAttribute("disabled","disabled");
+
+                document.getElementById("txtnombre").value = nombre;
+                document.getElementById("txtapellidoP").value = apellidoP;
+                document.getElementById("txtapellidoM").value = apellidoM;
+                document.getElementById("txtcelular").value = celular;
+                document.getElementById("txtdireccion").value = direccion;
+                document.getElementById("txtcorreo").value = correo;
+            } else if (titulo == "Error de conexion"){
+                alert(contenido);
+            }
+        }
     }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/modificarPropietario.pl", true);
+    xhr.setRequestHeader(
+        'Content-type', 
+        'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
 };
 
 // FUNCION QUE PERMITE ELIMINAR AL PROPIETARIO
@@ -233,3 +258,8 @@ function clickEliminar(){
         xhr.responseType = "document";
         xhr.send(q);
 };
+
+// FUNCION QUE HACE QUE LA PRIMERA LETRA SEA MAYUSCULA Y LAS DEMAS SEAN MINUSCULAS
+function primeraMayscula(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

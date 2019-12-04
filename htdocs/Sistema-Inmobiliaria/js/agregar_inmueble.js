@@ -12,6 +12,7 @@ var idInmueble;
 var outerHTML;
 var idAsesor;
 var nombreAsesor;
+var q;
 
 // RECUPERA LOS PARAMETROS DEL URL
 variable = (new URL(document.location)).searchParams;
@@ -80,84 +81,50 @@ function cerrarRegistro(){
 
 // FUNCION QUE GUARDA EL INMUEBLE
 function guardarInmueble(){
-    /* RECUPERAR DATOS DE LOS INPUT */
-    var camposVacios = new Boolean(false);
+    console.log("Agregar Inmueble");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            var respuesta = xhr.responseXML;
+            console.log(xhr.responseXML);
 
-    var cmb = document.getElementById("cmbPropietario");
-    idPropietario = cmb.options[cmb.selectedIndex].value;
-    //var idPropietario = document.getElementById("txtnombre").value;
-    ciudad = document.getElementById("txtciudad").value;
-    colonia = document.getElementById("txtcolonia").value;
-    calle = document.getElementById("txtcalle").value;
-    numExt = document.getElementById("txtnumExt").value;
-    numInt = document.getElementById("txtnumInt").value;
-    precio = document.getElementById("txtprecio").value;
-    tipoTransaccion = document.getElementById("tipoTransaccion").value;
-    tipoInmueble = document.getElementById("tipoInmueble").value;
+            var x = respuesta.getElementsByTagName("resultado");
 
-    // CREACION DEL QUERY 
-    var q = "idPropietario="+idPropietario+"&ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&precio="+precio+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble;
-    
-    // VALIDACION DE CAMPOS VACIOS
-    var input = document.getElementsByTagName("input");
-    for (var i=0; i<input.length; i++){
-        if (input[i].id != "txtnumInt"){
-            if (input[i].value == "" || input[i].value == null) {
-                camposVacios = true;
-            }
-        }
-    }
-    
-    if (camposVacios == false) {
+            var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+            console.log(titulo);
+            var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
 
-    // EN CASO DE QUE NO HAYA CAMPOS VACIOS SE HACE EL REQUEST A LA BD POR MEDIO DEL ARCHIVO .PL
-        console.log("Agregar Inmueble");
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4){
-                var respuesta = xhr.responseXML;
-                console.log(xhr.responseXML);
-
-                var x = respuesta.getElementsByTagName("resultado");
-
-                var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
-                console.log(titulo);
-                var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
-
-                if (titulo == "Nuevo inmueble"){
-                    var id = x[0].getElementsByTagName("idInmueble")[0].textContent;
-                    idInmueble = id;
-                    
-                    // DEPENDIENDO DEL TIPO DE INMUEBLE ES A LA FUNCION A LA QUE NOS REDIRIGE
-                    if (tipoInmueble == "Casa") {
-                        guardarCasa();
-                    } else if (tipoInmueble == "Departamento") {
-                        guardarDepartamento();
-                    } else if (tipoInmueble == "Edificio") {
-                        guardarEdificio();
-                    } else if (tipoInmueble == "Local") {
-                        guardarLocal();
-                    } else if (tipoInmueble == "Oficina") {
-                        guardarOficina();
-                    } else if (tipoInmueble == "Terreno") {
-                        guardarTerreno();
-                    }
-                } else if (titulo == "Error de conexion"){
-                    alert(contenido);
+            if (titulo == "Nuevo inmueble"){
+                var id = x[0].getElementsByTagName("idInmueble")[0].textContent;
+                idInmueble = id;
+                
+                // DEPENDIENDO DEL TIPO DE INMUEBLE ES A LA FUNCION A LA QUE NOS REDIRIGE
+                if (tipoInmueble == "Casa") {
+                    guardarCasa();
+                } else if (tipoInmueble == "Departamento") {
+                    guardarDepartamento();
+                } else if (tipoInmueble == "Edificio") {
+                    guardarEdificio();
+                } else if (tipoInmueble == "Local") {
+                    guardarLocal();
+                } else if (tipoInmueble == "Oficina") {
+                    guardarOficina();
+                } else if (tipoInmueble == "Terreno") {
+                    guardarTerreno();
                 }
+            } else if (titulo == "Error de conexion"){
+                alert(contenido);
             }
         }
-
-        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/agregarInmueble.pl", true);
-        xhr.setRequestHeader(
-            'Content-type', 
-            'application/x-www-form-urlencoded'
-        ); 
-        xhr.responseType = "document";
-        xhr.send(q);
-    } else if (camposVacios == true) {
-        alert("Hay campos vacios");
     }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/agregarInmueble.pl", true);
+    xhr.setRequestHeader(
+        'Content-type', 
+        'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
 };
 
 // FUNCION QUE GUARDA LOS CAMPO DE CASA
@@ -707,3 +674,70 @@ function guardarTerreno(){
     xhr.send(q);
 
 };
+
+// FUNCION QUE BUSCA UN INMUBLE CON LA MISMA CIUDAD, COLONIA, CALLE, NUMERO EXTERIOR E INTERIOR, TIPO DE TRANSACCION
+// Y TIPO DE INMUEBLE PARA VERIFICAR QUE NO SE VAYA A DUPLICAR 
+function buscarDuplicado() {
+    /* RECUPERAR DATOS DE LOS INPUT */
+    var camposVacios = new Boolean(false);
+
+    var cmb = document.getElementById("cmbPropietario");
+    idPropietario = cmb.options[cmb.selectedIndex].value;
+    ciudad = document.getElementById("txtciudad").value;
+    ciudad = primeraMayscula(ciudad.toLowerCase());
+    colonia = document.getElementById("txtcolonia").value;
+    colonia = primeraMayscula(colonia.toLowerCase());
+    calle = document.getElementById("txtcalle").value;
+    calle = primeraMayscula(calle.toLowerCase());
+    numExt = document.getElementById("txtnumExt").value;
+    numInt = document.getElementById("txtnumInt").value;
+    precio = document.getElementById("txtprecio").value;
+    tipoTransaccion = document.getElementById("tipoTransaccion").value;
+    tipoInmueble = document.getElementById("tipoInmueble").value;
+
+    // CREACION DEL QUERY 
+    var query = "ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble;
+    
+    // VALIDACION DE CAMPOS VACIOS
+    if (ciudad == "" || ciudad == null, colonia == "" || colonia == null, calle == "" || calle == null, numExt == "" || numExt == null, 
+        numInt == "" || numInt == null, precio == "" || precio == null) {
+        camposVacios = true;
+    }
+    if (camposVacios == true) {
+        alert("Hay campos vacios");
+    } else {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                var respuesta = xhr.responseXML;
+                console.log(xhr.responseXML);
+                x = respuesta.getElementsByTagName('resultado');
+                
+                var titulo = x[0].getElementsByTagName("titulo")[0].textContent;
+                console.log(titulo);
+                if (titulo == "Inmueble duplicado"){
+                    var contenido = x[0].getElementsByTagName("contenido")[0].textContent;
+                    alert(contenido);
+                } else if (titulo == "Inmueble no duplicado"){
+                    q = "idPropietario="+idPropietario+"&ciudad="+ciudad+"&colonia="+colonia+"&calle="+calle+"&numExt="+numExt+"&numInt="+numInt+"&precio="+precio+"&tipoTransaccion="+tipoTransaccion+"&tipoInmueble="+tipoInmueble;
+    
+                    guardarInmueble();
+                }
+            }
+        }
+
+        xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/verificarNuevoInmueble.pl", true);
+        xhr.setRequestHeader(
+        'Content-type', 
+        'application/x-www-form-urlencoded'
+        ); 
+        xhr.responseType = "document";
+        xhr.send(query);
+    }  
+}
+
+
+// FUNCION QUE HACE QUE LA PRIMERA LETRA SEA MAYUSCULA Y LAS DEMAS SEAN MINUSCULAS
+function primeraMayscula(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
