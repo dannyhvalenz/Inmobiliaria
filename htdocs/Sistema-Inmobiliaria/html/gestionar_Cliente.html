@@ -62,18 +62,23 @@
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <!--TEXTFIELD NOMBRE DEL CLIENTE-->
+                    <label>Nombre</label>
                     <input
+                        onkeypress="return /[a-z]/i.test(event.key)" 
                         class="w3-input w3-animate-input w3-bar-item"
                         type="text"
                         placeholder="Nombre"
                         id="txtnombre"
+                        
                     />
                 </div>
             </div>
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <!--TEXTFIELD APELLIDO PATERNO-->
+                    <label>Apellido Paterno</label>
                     <input
+                        onkeypress="return /[a-z]/i.test(event.key)" 
                         class="w3-input w3-animate-input w3-bar-item"
                         type="text"
                         placeholder="Apellido Paterno"
@@ -84,7 +89,9 @@
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <!--TEXTFIELD APELLIDO MATERNO-->
+                    <label>Apellido Materno</label>
                     <input
+                        onkeypress="return /[a-z]/i.test(event.key)" 
                         class="w3-input w3-animate-input w3-bar-item"
                         type="text"
                         placeholder="Apellido Materno"
@@ -95,10 +102,12 @@
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <!--TEXTFIELD CELULAR-->
+                    <label>Celular</label>
                     <input
+                        oninput="validity.valid||(value = '')"
                         class="w3-input w3-animate-input w3-bar-item"
                         type="number"
-                        min="10" max="10"
+                        min="0"
                         placeholder="Celular"
                         id="txtcelular"
                     />
@@ -107,10 +116,11 @@
             <div class="w3-half w3-container">
                 <div class="w3-container w3-padding-16 ">
                     <!--TEXTFIELD CORREO ELECTRONICO-->
+                    <label>Correo Electrónico</label>
                     <input
                         class="w3-input w3-animate-input w3-bar-item"
                         type="email"
-                        placeholder="Correo electronico"
+                        placeholder="Correo electrónico"
                         id="txtcorreo"
                     />
                 </div>

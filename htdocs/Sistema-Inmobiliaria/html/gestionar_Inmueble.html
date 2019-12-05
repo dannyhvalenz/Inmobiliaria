@@ -59,7 +59,9 @@
                 <!--TEXTFIELD CIUDAD-->
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16">
+                        <label>Ciudad</label>
                         <input
+                            onkeypress="return /[a-z]/i.test(event.key)" 
                             class="w3-input w3-animate-input "
                             type="text"
                             placeholder="Ciudad"
@@ -70,6 +72,7 @@
                 <!--TEXTFIELD COLONIA-->
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16">
+                        <label>Colonia</label>
                         <input
                             class="w3-input w3-animate-input "
                             type="text"
@@ -81,6 +84,7 @@
                 <!--TEXTFIELD CALLE-->
                 <div class="w3-third">
                     <div class="w3-container w3-padding-16">
+                        <label>Calle</label>
                         <input
                             class="w3-input w3-animate-input "
                             type="text"
@@ -92,10 +96,13 @@
                 <!--TEXTFIELD NUM EXTERIOR-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
+                        <label>Núm. Exterior</label>
                         <input
+                            oninput="validity.valid||(value = '')"
                             class="w3-input w3-animate-input "
                             type="number"
-                            placeholder="Num. Exterior"
+                            min="0"
+                            placeholder="Núm. Exterior"
                             id="txtnumExt"
                         />
                     </div>
@@ -103,10 +110,13 @@
                 <!--TEXTFIELD NUM INTERIOR-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
+                        <label>Núm. Interior</label>
                         <input
+                            oninput="validity.valid||(value = '')"
                             class="w3-input w3-animate-input "
                             type="number"
-                            placeholder="Num. Interior"
+                            min="0"
+                            placeholder="Núm. Interior"
                             id="txtnumInt"
                         />
                     </div>
@@ -114,9 +124,12 @@
                 <!--TEXTFIELD PRECIO-->
                 <div class="w3-third w3-container">
                     <div class="w3-container w3-padding-16">
+                        <label>Precio</label>
                         <input
+                            oninput="validity.valid||(value = '')"
                             class="w3-input w3-animate-input "
                             type="number"
+                            min="0"
                             placeholder="Precio"
                             id="txtprecio"
                         />
@@ -125,7 +138,7 @@
                 <!--COMBOBOX TIPO DE TRANSACCION-->
                 <div class="w3-third w3-container">
                     <div class="w3-bar-item w3-container w3-padding-16">
-                        <p class="p_selector">Tipo de transaccion:
+                        <p class="p_selector">Tipo de transacción:
                             <select name="TipoTransaccion" id="tipoTransaccion" class="selector" placeholder="El inmueble es para:">
                                 <option value="Renta">Renta</option>
                                 <option value="Venta">Venta</option>

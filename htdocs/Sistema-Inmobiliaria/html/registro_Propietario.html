@@ -42,14 +42,17 @@
         <!--FORMULARIO QUE PERMITE REGISTRAR UN PROPIETARIO-->
         <form class="w3-card-4">
             <header class="w3-container w3-orange w3-center ">
-                <h1 class="w3-xxlarge w3-text-white" >REGISTRO DE PROPIETARIO</h1>
+                <h1 class="w3-xxlarge w3-text-white">REGISTRO DE PROPIETARIO</h1>
             </header>
 
             <div class="w3-row-padding w3-margin-bottom">
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
                         <!--TEXTFIELD NOMBRE-->
+                        <label>Nombre</label>
                         <input
+                            onkeypress="return /[a-z]/i.test(event.key)" 
+                            oninvalid="setCustomValidity('Solo letras')"
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
                             placeholder="Nombre"
@@ -60,7 +63,9 @@
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
                         <!--TEXTFIELD APELLIDO PATERNO-->
+                        <label>Apellido Paterno</label>
                         <input
+                            onkeypress="return /[a-z]/i.test(event.key)" 
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
                             placeholder="Apellido Paterno"
@@ -71,7 +76,9 @@
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
                         <!--TEXTFIELD APELLIDO MATERNO-->
+                        <label>Apellido Materno</label>
                         <input
+                            onkeypress="return /[a-z]/i.test(event.key)" 
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
                             placeholder="Apellido Materno"
@@ -82,10 +89,12 @@
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
                         <!--TEXTFIELD CELULAR-->
+                        <label>Celular</label>
                         <input
+                            oninput="validity.valid||(value = '')"
                             class="w3-input w3-animate-input w3-bar-item"
                             type="number"
-                            min="10" max="10"
+                            min="0"
                             placeholder="Celular"
                             id="txtcelular"
                         />
@@ -94,10 +103,11 @@
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
                         <!--TEXTFIELD DIRECCION-->
+                        <label>Dirección</label>
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="text"
-                            placeholder="Direccion"
+                            placeholder="Dirección"
                             id="txtdireccion"
                         />
                     </div>
@@ -105,10 +115,11 @@
                 <div class="w3-half w3-container">
                     <div class="w3-container w3-padding-16 ">
                         <!--TEXTFIELD CORREO ELECTRONICO-->
+                        <label>Correo Electrónico</label>
                         <input
                             class="w3-input w3-animate-input w3-bar-item"
                             type="email"
-                            placeholder="Correo electronico"
+                            placeholder="Correo electrónico"
                             id="txtcorreo"
                         />
                     </div>
