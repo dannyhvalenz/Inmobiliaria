@@ -62,7 +62,7 @@ function cargarInmuebles(ordenarPor){
                 xs = new XMLSerializer();
 
                 var coincidencias = x[0].childNodes[0];
-
+                
                 if (coincidencias != null) {
                     document.getElementById("titulo").style.display = "none";
                     for (i=0; i<x.length; ++i) {
@@ -119,6 +119,7 @@ function buscarInicial(q) {
 
                 if (coincidencias != null) {
                     document.getElementById("titulo").style.display = "none";
+                    document.getElementById('box2').innerHTML = '';
                     for (i=0; i<x.length; ++i) {
                         
                         document.getElementById('box2').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
@@ -187,6 +188,7 @@ function buscar(ordenarPor) {
 
                 if (coincidencias != null) {
                     document.getElementById("titulo").style.display = "none";
+                    document.getElementById('box2').innerHTML = '';
                     for (i=0; i<x.length; ++i) {
                         
                         document.getElementById('box2').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
@@ -300,9 +302,57 @@ function inventario() {
 
 // FUNCION QUE LIMPIA LOS FILTROS
 function limpiarBusqueda () {
-    buscarActivo = false;
-    var path = "http://localhost:8888/Sistema-Inmobiliaria/html/inventario.html";
-    window.open(path,"_parent");
+    var xhr = new XMLHttpRequest();
+    var existeRespuesta = new Boolean (false);
+    var q = "ordenarPor=No";
+    history.replaceState({}, null, "http://localhost:8888/Sistema-Inmobiliaria/html/inventario.html");
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var respuesta = xhr.responseXML;
+            var respuestaTexto = new XMLSerializer().serializeToString(respuesta);
+            console.log("Cargar Inmuebles");
+            console.log(xhr.responseXML);
+            x = respuesta.getElementsByTagName('resultado');
+            
+            if (respuesta != null){
+                existeRespuesta = true;
+            } else {
+                existeRespuesta = false;
+            }
+            
+            if (existeRespuesta == true){
+                xs = new XMLSerializer();
+
+                var coincidencias = x[0].childNodes[0];
+                
+                if (coincidencias != null) {
+                    document.getElementById("titulo").style.display = "none";
+                    document.getElementById('box2').innerHTML = '';
+                    for (i=0; i<x.length; ++i) {
+                        
+                        document.getElementById('box2').innerHTML += xs.serializeToString(x[i]) + '\n<br />\n';
+                    }
+                } else {
+                    document.getElementById("titulo").style.display = "block";
+                    document.getElementById('box2').innerHTML = '';
+                    document.getElementById("titulo").innerHTML = 'No hay coincidencias';
+                }
+            } else {
+                alert("Error de conexion con la base de datos");
+            }
+            
+            
+        }
+    }
+
+    xhr.open("POST", "http://localhost:8888/cgi-bin/Sistema-Inmobiliaria/mostrarInmueblesCliente.pl", true);
+    xhr.setRequestHeader(
+    'Content-type', 
+    'application/x-www-form-urlencoded'
+    ); 
+    xhr.responseType = "document";
+    xhr.send(q);
+    
 };
 
 // FUNCION PARA EL BOTON ABRE LA VENTANA CON LA INFO DEL INMUEBLE
